@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		506CB1EB1BF46E8B00BCBBEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506CB1EA1BF46E8B00BCBBEE /* AppDelegate.swift */; };
+		506CB1ED1BF46E8B00BCBBEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506CB1EC1BF46E8B00BCBBEE /* ViewController.swift */; };
+		506CB1F01BF46E8B00BCBBEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506CB1EE1BF46E8B00BCBBEE /* Main.storyboard */; };
+		506CB1F21BF46E8B00BCBBEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 506CB1F11BF46E8B00BCBBEE /* Assets.xcassets */; };
+		506CB1F51BF46E8B00BCBBEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506CB1F31BF46E8B00BCBBEE /* LaunchScreen.storyboard */; };
+		506CB2001BF46E8C00BCBBEE /* ChimeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506CB1FF1BF46E8C00BCBBEE /* ChimeeTests.swift */; };
+		506CB20B1BF46E8C00BCBBEE /* ChimeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506CB20A1BF46E8C00BCBBEE /* ChimeeUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		506CB1FC1BF46E8C00BCBBEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 506CB1DF1BF46E8A00BCBBEE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506CB1E61BF46E8A00BCBBEE;
+			remoteInfo = Chimee;
+		};
+		506CB2071BF46E8C00BCBBEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 506CB1DF1BF46E8A00BCBBEE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506CB1E61BF46E8A00BCBBEE;
+			remoteInfo = Chimee;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		506CB1E71BF46E8B00BCBBEE /* Chimee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chimee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		506CB1EA1BF46E8B00BCBBEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		506CB1EC1BF46E8B00BCBBEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		506CB1EF1BF46E8B00BCBBEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		506CB1F11BF46E8B00BCBBEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		506CB1F41BF46E8B00BCBBEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		506CB1F61BF46E8B00BCBBEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		506CB1FB1BF46E8C00BCBBEE /* ChimeeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChimeeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		506CB1FF1BF46E8C00BCBBEE /* ChimeeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChimeeTests.swift; sourceTree = "<group>"; };
+		506CB2011BF46E8C00BCBBEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		506CB2061BF46E8C00BCBBEE /* ChimeeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChimeeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		506CB20A1BF46E8C00BCBBEE /* ChimeeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChimeeUITests.swift; sourceTree = "<group>"; };
+		506CB20C1BF46E8C00BCBBEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		506CB1E41BF46E8A00BCBBEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		506CB1F81BF46E8C00BCBBEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		506CB2031BF46E8C00BCBBEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		506CB1DE1BF46E8A00BCBBEE = {
+			isa = PBXGroup;
+			children = (
+				506CB1E91BF46E8B00BCBBEE /* Chimee */,
+				506CB1FE1BF46E8C00BCBBEE /* ChimeeTests */,
+				506CB2091BF46E8C00BCBBEE /* ChimeeUITests */,
+				506CB1E81BF46E8B00BCBBEE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		506CB1E81BF46E8B00BCBBEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				506CB1E71BF46E8B00BCBBEE /* Chimee.app */,
+				506CB1FB1BF46E8C00BCBBEE /* ChimeeTests.xctest */,
+				506CB2061BF46E8C00BCBBEE /* ChimeeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		506CB1E91BF46E8B00BCBBEE /* Chimee */ = {
+			isa = PBXGroup;
+			children = (
+				506CB1EA1BF46E8B00BCBBEE /* AppDelegate.swift */,
+				506CB1EC1BF46E8B00BCBBEE /* ViewController.swift */,
+				506CB1EE1BF46E8B00BCBBEE /* Main.storyboard */,
+				506CB1F11BF46E8B00BCBBEE /* Assets.xcassets */,
+				506CB1F31BF46E8B00BCBBEE /* LaunchScreen.storyboard */,
+				506CB1F61BF46E8B00BCBBEE /* Info.plist */,
+			);
+			path = Chimee;
+			sourceTree = "<group>";
+		};
+		506CB1FE1BF46E8C00BCBBEE /* ChimeeTests */ = {
+			isa = PBXGroup;
+			children = (
+				506CB1FF1BF46E8C00BCBBEE /* ChimeeTests.swift */,
+				506CB2011BF46E8C00BCBBEE /* Info.plist */,
+			);
+			path = ChimeeTests;
+			sourceTree = "<group>";
+		};
+		506CB2091BF46E8C00BCBBEE /* ChimeeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				506CB20A1BF46E8C00BCBBEE /* ChimeeUITests.swift */,
+				506CB20C1BF46E8C00BCBBEE /* Info.plist */,
+			);
+			path = ChimeeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		506CB1E61BF46E8A00BCBBEE /* Chimee */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 506CB20F1BF46E8C00BCBBEE /* Build configuration list for PBXNativeTarget "Chimee" */;
+			buildPhases = (
+				506CB1E31BF46E8A00BCBBEE /* Sources */,
+				506CB1E41BF46E8A00BCBBEE /* Frameworks */,
+				506CB1E51BF46E8A00BCBBEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chimee;
+			productName = Chimee;
+			productReference = 506CB1E71BF46E8B00BCBBEE /* Chimee.app */;
+			productType = "com.apple.product-type.application";
+		};
+		506CB1FA1BF46E8C00BCBBEE /* ChimeeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 506CB2121BF46E8C00BCBBEE /* Build configuration list for PBXNativeTarget "ChimeeTests" */;
+			buildPhases = (
+				506CB1F71BF46E8C00BCBBEE /* Sources */,
+				506CB1F81BF46E8C00BCBBEE /* Frameworks */,
+				506CB1F91BF46E8C00BCBBEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				506CB1FD1BF46E8C00BCBBEE /* PBXTargetDependency */,
+			);
+			name = ChimeeTests;
+			productName = ChimeeTests;
+			productReference = 506CB1FB1BF46E8C00BCBBEE /* ChimeeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		506CB2051BF46E8C00BCBBEE /* ChimeeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 506CB2151BF46E8C00BCBBEE /* Build configuration list for PBXNativeTarget "ChimeeUITests" */;
+			buildPhases = (
+				506CB2021BF46E8C00BCBBEE /* Sources */,
+				506CB2031BF46E8C00BCBBEE /* Frameworks */,
+				506CB2041BF46E8C00BCBBEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				506CB2081BF46E8C00BCBBEE /* PBXTargetDependency */,
+			);
+			name = ChimeeUITests;
+			productName = ChimeeUITests;
+			productReference = 506CB2061BF46E8C00BCBBEE /* ChimeeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		506CB1DF1BF46E8A00BCBBEE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = StudyMongolian;
+				TargetAttributes = {
+					506CB1E61BF46E8A00BCBBEE = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					506CB1FA1BF46E8C00BCBBEE = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 506CB1E61BF46E8A00BCBBEE;
+					};
+					506CB2051BF46E8C00BCBBEE = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 506CB1E61BF46E8A00BCBBEE;
+					};
+				};
+			};
+			buildConfigurationList = 506CB1E21BF46E8A00BCBBEE /* Build configuration list for PBXProject "Chimee" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 506CB1DE1BF46E8A00BCBBEE;
+			productRefGroup = 506CB1E81BF46E8B00BCBBEE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				506CB1E61BF46E8A00BCBBEE /* Chimee */,
+				506CB1FA1BF46E8C00BCBBEE /* ChimeeTests */,
+				506CB2051BF46E8C00BCBBEE /* ChimeeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		506CB1E51BF46E8A00BCBBEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				506CB1F51BF46E8B00BCBBEE /* LaunchScreen.storyboard in Resources */,
+				506CB1F21BF46E8B00BCBBEE /* Assets.xcassets in Resources */,
+				506CB1F01BF46E8B00BCBBEE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		506CB1F91BF46E8C00BCBBEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		506CB2041BF46E8C00BCBBEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		506CB1E31BF46E8A00BCBBEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				506CB1ED1BF46E8B00BCBBEE /* ViewController.swift in Sources */,
+				506CB1EB1BF46E8B00BCBBEE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		506CB1F71BF46E8C00BCBBEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				506CB2001BF46E8C00BCBBEE /* ChimeeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		506CB2021BF46E8C00BCBBEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				506CB20B1BF46E8C00BCBBEE /* ChimeeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		506CB1FD1BF46E8C00BCBBEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506CB1E61BF46E8A00BCBBEE /* Chimee */;
+			targetProxy = 506CB1FC1BF46E8C00BCBBEE /* PBXContainerItemProxy */;
+		};
+		506CB2081BF46E8C00BCBBEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506CB1E61BF46E8A00BCBBEE /* Chimee */;
+			targetProxy = 506CB2071BF46E8C00BCBBEE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		506CB1EE1BF46E8B00BCBBEE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				506CB1EF1BF46E8B00BCBBEE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		506CB1F31BF46E8B00BCBBEE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				506CB1F41BF46E8B00BCBBEE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		506CB20D1BF46E8C00BCBBEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		506CB20E1BF46E8C00BCBBEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		506CB2101BF46E8C00BCBBEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Chimee/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.StudyMongolian.Chimee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		506CB2111BF46E8C00BCBBEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Chimee/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.StudyMongolian.Chimee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		506CB2131BF46E8C00BCBBEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ChimeeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.StudyMongolian.ChimeeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chimee.app/Chimee";
+			};
+			name = Debug;
+		};
+		506CB2141BF46E8C00BCBBEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ChimeeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.StudyMongolian.ChimeeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chimee.app/Chimee";
+			};
+			name = Release;
+		};
+		506CB2161BF46E8C00BCBBEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ChimeeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.StudyMongolian.ChimeeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Chimee;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		506CB2171BF46E8C00BCBBEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ChimeeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.StudyMongolian.ChimeeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Chimee;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		506CB1E21BF46E8A00BCBBEE /* Build configuration list for PBXProject "Chimee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				506CB20D1BF46E8C00BCBBEE /* Debug */,
+				506CB20E1BF46E8C00BCBBEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		506CB20F1BF46E8C00BCBBEE /* Build configuration list for PBXNativeTarget "Chimee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				506CB2101BF46E8C00BCBBEE /* Debug */,
+				506CB2111BF46E8C00BCBBEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		506CB2121BF46E8C00BCBBEE /* Build configuration list for PBXNativeTarget "ChimeeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				506CB2131BF46E8C00BCBBEE /* Debug */,
+				506CB2141BF46E8C00BCBBEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		506CB2151BF46E8C00BCBBEE /* Build configuration list for PBXNativeTarget "ChimeeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				506CB2161BF46E8C00BCBBEE /* Debug */,
+				506CB2171BF46E8C00BCBBEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 506CB1DF1BF46E8A00BCBBEE /* Project object */;
+}
