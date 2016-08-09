@@ -1,4 +1,7 @@
-// This is a generic Keyboard Key class for specific key classes to subclass. Its main purposes are to 
+// KeyboardKey
+// version 1.0
+
+// This is a generic Keyboard Key class for specific key classes to subclass. Its main purposes are to
 // (1) provide a common background appearance for all keys
 // (2) set the standard for how to communicate with the parent keyboard class
 
@@ -38,7 +41,7 @@ class KeyboardKey: UIControl {
         }
     }
     
-    var borderColor = UIColor.grayColor() {
+    var borderColor = UIColor.blackColor() {
         didSet {
             backgroundLayer.setNeedsDisplay()
         }

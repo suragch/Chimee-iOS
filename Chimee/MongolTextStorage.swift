@@ -1,10 +1,7 @@
-
+// MongolTextStorage
+// version 1.0.0
 
 import UIKit
-
-
-// TODO: Note that this class is different than in Mongol App Componants
-// Do no overwrite this class. Update Mongol app componants
 
 class MongolTextStorage {
     
