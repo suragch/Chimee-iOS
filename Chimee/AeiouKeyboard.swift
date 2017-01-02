@@ -446,7 +446,6 @@ class AeiouKeyboard: UIView, KeyboardKeyDelegate {
         }
     }
     
-    //asdf
     // FIXME: Type Baina space Jirguga, highlight Jirguga, type something else.
     
     // MARK: - KeyboardKeyDelegate protocol
