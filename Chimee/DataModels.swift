@@ -23,27 +23,27 @@ typealias Message = (
 )
 
 enum WordGender: Int64 {
-    case Neutral = 0
-    case Masculine = 1
-    case Feminine = 2
+    case neutral = 0
+    case masculine = 1
+    case feminine = 2
 }
 
 enum WordEnding {
-    case Nil
-    case Vowel
-    case N
-    case BigDress // b, g, d, r, s
-    case OtherConsonant // not N or BGDRS
+    case `nil`
+    case vowel
+    case n
+    case bigDress // b, g, d, r, s
+    case otherConsonant // not N or BGDRS
 }
 
 enum SuffixType: Int64 {
-    case VowelOnly = 0
-    case NOnly = 1
-    case ConsonantNonN = 2
-    case ConsonantsAll = 3
-    case BigDress = 4
-    case NotBigDress = 5
-    case All = 6
+    case vowelOnly = 0
+    case nOnly = 1
+    case consonantNonN = 2
+    case consonantsAll = 3
+    case bigDress = 4
+    case notBigDress = 5
+    case all = 6
 }
 
 struct UserDefaultsKey {

@@ -3,8 +3,8 @@ import SQLite
 protocol DataHelperProtocol {
     associatedtype T
     static func createTable() throws -> Void
-    static func insert(item: T) throws -> Int64
-    static func delete(item: T) throws -> Void
+    static func insert(_ item: T) throws -> Int64
+    static func delete(_ item: T) throws -> Void
     static func findAll() throws -> [T]?
 }
 
@@ -27,7 +27,7 @@ class UserDictionaryDataHelper: DataHelperProtocol {
     
     static func createTable() throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
 
         
@@ -49,7 +49,7 @@ class UserDictionaryDataHelper: DataHelperProtocol {
     
     static func listInfoForTable() throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         do {
             
@@ -62,11 +62,11 @@ class UserDictionaryDataHelper: DataHelperProtocol {
         } catch _ { }
     }
     
-    static func insert(item: T) throws -> Int64 {
+    static func insert(_ item: T) throws -> Int64 {
         
         // error checking
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         guard
@@ -74,7 +74,7 @@ class UserDictionaryDataHelper: DataHelperProtocol {
             let frequencyToInsert = item.frequency,
             let followingToInsert = item.following else {
                 
-            throw DataAccessError.Nil_In_Data
+            throw DataAccessError.nil_In_Data
         }
         
         // do the insert
@@ -82,34 +82,34 @@ class UserDictionaryDataHelper: DataHelperProtocol {
         do {
             let rowId = try db.run(insert)
             guard rowId > 0 else {
-                throw DataAccessError.Insert_Error
+                throw DataAccessError.insert_Error
             }
             return rowId
         } catch _ {
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
     }
     
-    static func delete (item: T) throws -> Void {
+    static func delete (_ item: T) throws -> Void {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         if let id = item.wordId {
             let query = userDictionary.filter(wordId == id)
             do {
                 let tmp = try db.run(query.delete())
                 guard tmp == 1 else {
-                    throw DataAccessError.Delete_Error
+                    throw DataAccessError.delete_Error
                 }
             } catch _ {
-                throw DataAccessError.Delete_Error
+                throw DataAccessError.delete_Error
             }
         }
     }
     
-    static func findWordForId(id: Int64) throws -> T? {
+    static func findWordForId(_ id: Int64) throws -> T? {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         let query = userDictionary.filter(wordId == id)
         do {
@@ -118,16 +118,16 @@ class UserDictionaryDataHelper: DataHelperProtocol {
                 return UserWord(wordId: item[wordId], word: item[word], frequency: item[frequency], following: item[following])
             }
         } catch _ {
-            throw DataAccessError.Search_Error
+            throw DataAccessError.search_Error
         }
         
         return nil // does this ever return nil after I added throw
         
     }
     
-    static func findWord(wordToFind: String) throws -> T? {
+    static func findWord(_ wordToFind: String) throws -> T? {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         let query = userDictionary.filter(word == wordToFind)
         do {
@@ -136,17 +136,17 @@ class UserDictionaryDataHelper: DataHelperProtocol {
                 return UserWord(wordId: item[wordId], word: item[word], frequency: item[frequency], following: item[following])
             }
         } catch _ {
-            throw DataAccessError.Search_Error
+            throw DataAccessError.search_Error
         }
         
         return nil // does this ever return nil after I added throw
         
     }
     
-    static func findWordsBeginningWith(mongolWord: String) throws -> [String] {
+    static func findWordsBeginningWith(_ mongolWord: String) throws -> [String] {
         
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         let searchPrefix = mongolWord + "%"
@@ -164,7 +164,7 @@ class UserDictionaryDataHelper: DataHelperProtocol {
         
     }
     
-    static func findFollowingWordsFor(mongolWord: String) throws -> [String] {
+    static func findFollowingWordsFor(_ mongolWord: String) throws -> [String] {
         
         do {
             
@@ -175,7 +175,7 @@ class UserDictionaryDataHelper: DataHelperProtocol {
                 return []
             }
             
-            return followingString.characters.split(",", maxSplit: Int.max, allowEmptySlices: false).map(String.init)
+            return followingString.characters.split(separator: ",", maxSplits: Int.max, omittingEmptySubsequences: true).map(String.init)
         } catch _ {
             print("error finding following words")
         }
@@ -183,9 +183,9 @@ class UserDictionaryDataHelper: DataHelperProtocol {
         return []
     }
     
-    static func updateFrequencyForWord(wordToUpdate: String) throws {
+    static func updateFrequencyForWord(_ wordToUpdate: String) throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         do {
@@ -202,16 +202,16 @@ class UserDictionaryDataHelper: DataHelperProtocol {
             
         } catch _ {
             print("some sort of error was thrown")
-            throw DataAccessError.Insert_Error // is this the best error to throw?
+            throw DataAccessError.insert_Error // is this the best error to throw?
         }
         
     }
     
-    static func updateFollowingForWord(wordToUpdate: String, withFollowingWord followingWord: String) throws -> Int {
+    static func updateFollowingForWord(_ wordToUpdate: String, withFollowingWord followingWord: String) throws -> Int {
         
         // error catching
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         guard !wordToUpdate.isEmpty && !followingWord.isEmpty else { return 0 }
         
@@ -253,18 +253,18 @@ class UserDictionaryDataHelper: DataHelperProtocol {
             
         } catch _ {
             print("some sort of error was thrown")
-            throw DataAccessError.Insert_Error // is this the best error to throw?
+            throw DataAccessError.insert_Error // is this the best error to throw?
         }
         
         return numberUpdated
     }
     
-    private static func reorderFollowingString(followingListString: String, withWord followingWord: String) -> String {
+    fileprivate static func reorderFollowingString(_ followingListString: String, withWord followingWord: String) -> String {
         
         if followingListString.isEmpty {
             return followingWord
         } else {
-            let followingSplit = followingListString.characters.split(",", maxSplit: Int.max, allowEmptySlices: false).map(String.init)
+            let followingSplit = followingListString.characters.split(separator: ",", maxSplits: Int.max, omittingEmptySubsequences: true).map(String.init)
             var newList = followingWord
             var counter = 0
             for item in followingSplit {
@@ -282,7 +282,7 @@ class UserDictionaryDataHelper: DataHelperProtocol {
     
     static func findAll() throws -> [T]? {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         var retArray = [T]()
         do {
@@ -291,7 +291,7 @@ class UserDictionaryDataHelper: DataHelperProtocol {
                 retArray.append(UserWord(wordId: item[wordId], word: item[word], frequency: item[frequency], following: item[following]))
             }
         } catch _ {
-            throw DataAccessError.Search_Error
+            throw DataAccessError.search_Error
         }
         
         return retArray

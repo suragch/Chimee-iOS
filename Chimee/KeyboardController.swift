@@ -3,20 +3,20 @@ import SQLite
 
 // View Controllers must adapt this protocol
 protocol KeyboardDelegate: class {
-    func keyWasTapped(character: String)
+    func keyWasTapped(_ character: String)
     func keyBackspace()
-    func keyNewKeyboardChosen(type: KeyboardType)
+    func keyNewKeyboardChosen(_ type: KeyboardType)
     func charBeforeCursor() -> String?
     func oneMongolWordBeforeCursor() -> String?
     func twoMongolWordsBeforeCursor() -> (String?, String?)
-    func replaceCurrentWordWith(replacementWord: String)
+    func replaceCurrentWordWith(_ replacementWord: String)
 }
 
 enum KeyboardType: Int {
-    case Qwerty
-    case Aeiou
-    case English
-    case Cyrillic
+    case qwerty
+    case aeiou
+    case english
+    case cyrillic
     
     static let AeiouName = "ᠴᠠᠭᠠᠨ ᠲᠣᠯᠤᠭᠠᠢ"
     static let QwertyName = "ᠺᠤᠮᠫᠢᠦ᠋ᠲ᠋ᠧᠷ"
@@ -38,15 +38,15 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
     // suggestion bar
     var suggestionBarTable: UITableView?
     let suggestionBarWidth: CGFloat = 30
-    private let cellReuseIdentifier = "cell"
-    private var suggestedWords: [String] = []
-    let suggestionBarBackgroundColor = UIColor.clearColor()
+    fileprivate let cellReuseIdentifier = "cell"
+    fileprivate var suggestedWords: [String] = []
+    let suggestionBarBackgroundColor = UIColor.clear
     
     // Mongol 
     let renderer = MongolUnicodeRenderer.sharedInstance
-    private let mongolComma = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_COMMA).toString()
-    private let mongolFullStop = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_FULL_STOP).toString()
-    private let nnbs = ScalarString(MongolUnicodeRenderer.Uni.NNBS).toString()
+    fileprivate let mongolComma = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_COMMA).toString()
+    fileprivate let mongolFullStop = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_FULL_STOP).toString()
+    fileprivate let nnbs = ScalarString(MongolUnicodeRenderer.Uni.NNBS).toString()
     
     var currentKeyboard: UIView?
     var oldKeyboard: UIView?
@@ -69,7 +69,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         
         // Suggestion bar
         suggestionBarTable = UITableView()
-        suggestionBarTable!.registerClass(SuggestionBarTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        suggestionBarTable!.register(SuggestionBarTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         suggestionBarTable!.delegate = self
         suggestionBarTable!.dataSource = self
         suggestionBarTable?.tableFooterView = UIView()
@@ -84,63 +84,63 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
     }
     
     
-    private func setupNewKeyboard() {
+    fileprivate func setupNewKeyboard() {
         // Keyboard
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let savedKeyboardType = KeyboardType(rawValue: defaults.integerForKey(UserDefaultsKey.mostRecentKeyboard)) ?? KeyboardType.Aeiou
+        let defaults = UserDefaults.standard
+        let savedKeyboardType = KeyboardType(rawValue: defaults.integer(forKey: UserDefaultsKey.mostRecentKeyboard)) ?? KeyboardType.aeiou
         
         let renderedAeiou = renderer.unicodeToGlyphs(KeyboardType.AeiouName)
         let renderedQwerty = renderer.unicodeToGlyphs(KeyboardType.QwertyName)
 
         
         switch savedKeyboardType {
-        case KeyboardType.Aeiou:
+        case KeyboardType.aeiou:
             
             if aeiouKeyboard == nil {
                 aeiouKeyboard = AeiouKeyboard(frame: self.bounds)
             }
             aeiouKeyboard?.delegate = self
             aeiouKeyboard?.otherAvailableKeyboards([
-                (KeyboardType.English, KeyboardType.EnglishName),
-                (KeyboardType.Cyrillic, KeyboardType.CyrillicName),
-                (KeyboardType.Qwerty, renderedQwerty)])
+                (KeyboardType.english, KeyboardType.EnglishName),
+                (KeyboardType.cyrillic, KeyboardType.CyrillicName),
+                (KeyboardType.qwerty, renderedQwerty)])
             currentKeyboard = aeiouKeyboard
             
             
-        case KeyboardType.Qwerty:
+        case KeyboardType.qwerty:
             
             if qwertyKeyboard == nil {
                 qwertyKeyboard = QwertyKeyboard(frame: self.bounds)
             }
             qwertyKeyboard?.delegate = self
             qwertyKeyboard?.otherAvailableKeyboards([
-                (KeyboardType.English, KeyboardType.EnglishName),
-                (KeyboardType.Cyrillic, KeyboardType.CyrillicName),
-                (KeyboardType.Aeiou, renderedAeiou)])
+                (KeyboardType.english, KeyboardType.EnglishName),
+                (KeyboardType.cyrillic, KeyboardType.CyrillicName),
+                (KeyboardType.aeiou, renderedAeiou)])
             currentKeyboard = qwertyKeyboard
             
-        case KeyboardType.English:
+        case KeyboardType.english:
             
             if englishKeyboard == nil {
                 englishKeyboard = EnglishKeyboard(frame: self.bounds)
             }
             englishKeyboard?.delegate = self
             englishKeyboard?.otherAvailableKeyboards([
-                (KeyboardType.Cyrillic, KeyboardType.CyrillicName),
-                (KeyboardType.Aeiou, renderedAeiou),
-                (KeyboardType.Qwerty, renderedQwerty)])
+                (KeyboardType.cyrillic, KeyboardType.CyrillicName),
+                (KeyboardType.aeiou, renderedAeiou),
+                (KeyboardType.qwerty, renderedQwerty)])
             currentKeyboard = englishKeyboard
             
-        case KeyboardType.Cyrillic:
+        case KeyboardType.cyrillic:
             
             if cyrillicKeyboard == nil {
                 cyrillicKeyboard = CyrillicKeyboard(frame: self.bounds)
             }
             cyrillicKeyboard?.delegate = self
             cyrillicKeyboard?.otherAvailableKeyboards([
-                (KeyboardType.English, KeyboardType.EnglishName),
-                (KeyboardType.Aeiou, renderedAeiou),
-                (KeyboardType.Qwerty, renderedQwerty)])
+                (KeyboardType.english, KeyboardType.EnglishName),
+                (KeyboardType.aeiou, renderedAeiou),
+                (KeyboardType.qwerty, renderedQwerty)])
             currentKeyboard = cyrillicKeyboard
 
         }
@@ -155,7 +155,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         
         let suggestionBarFrame = CGRect(origin: self.bounds.origin, size: CGSize(width: suggestionBarWidth, height: self.bounds.height))
         suggestionBarTable?.frame = suggestionBarFrame
-        suggestionBarTable!.separatorInset = UIEdgeInsetsZero
+        suggestionBarTable!.separatorInset = UIEdgeInsets.zero
         suggestionBarTable!.estimatedRowHeight = 44.0
         suggestionBarTable!.rowHeight = UITableViewAutomaticDimension
         suggestionBarTable?.backgroundColor = suggestionBarBackgroundColor
@@ -167,7 +167,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
     
     // MARK: - KeyboardDelegate protocol
     
-    func keyWasTapped(character: String) {
+    func keyWasTapped(_ character: String) {
         
         // update dictionary with word
         if character == " " || character == "\n" {
@@ -216,7 +216,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         return delegate?.twoMongolWordsBeforeCursor() ?? (nil, nil)
     }
     
-    func replaceCurrentWordWith(replacementWord: String) {
+    func replaceCurrentWordWith(_ replacementWord: String) {
         delegate?.replaceCurrentWordWith(replacementWord)
     }
     
@@ -224,11 +224,11 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         return delegate?.charBeforeCursor()
     }
     
-    func keyNewKeyboardChosen(type: KeyboardType) {
+    func keyNewKeyboardChosen(_ type: KeyboardType) {
         
         // save new keyboard
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(type.rawValue, forKey: UserDefaultsKey.mostRecentKeyboard)
+        let defaults = UserDefaults.standard
+        defaults.set(type.rawValue, forKey: UserDefaultsKey.mostRecentKeyboard)
         
         // remove old keyboard
         currentKeyboard?.removeFromSuperview()
@@ -254,18 +254,18 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
     // MARK: - Table View
     
     // number of rows in table view
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.suggestedWords.count
     }
     
     // create a cell for each table view row
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:SuggestionBarTableViewCell = self.suggestionBarTable!.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SuggestionBarTableViewCell
-        cell.backgroundColor = UIColor.clearColor()
-        cell.separatorInset = UIEdgeInsetsZero
+        let cell:SuggestionBarTableViewCell = self.suggestionBarTable!.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! SuggestionBarTableViewCell
+        cell.backgroundColor = UIColor.clear
+        cell.separatorInset = UIEdgeInsets.zero
         cell.preservesSuperviewLayoutMargins = false
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsets.zero
         
         let renderedText = renderer.unicodeToGlyphs(self.suggestedWords[indexPath.row])
         cell.mongolLabel.text = renderedText
@@ -274,7 +274,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
     }
     
     // method to run when table view cell is tapped
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let chosenWord = self.suggestedWords[indexPath.row]
         
@@ -321,12 +321,12 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         
     }
     
-    func updateDictionaryWithWord(word: String, previousWord: String?) {
+    func updateDictionaryWithWord(_ word: String, previousWord: String?) {
         
         // do on background thread
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             // increment frequency (or insert if not in dictionary)
             do {
@@ -343,7 +343,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
             // update following for previous word
             if let previous = previousWord {
                 do {
-                    try UserDictionaryDataHelper.updateFollowingForWord(previous, withFollowingWord: word)
+                    _ = try UserDictionaryDataHelper.updateFollowingForWord(previous, withFollowingWord: word)
                 } catch _ {
                     print("following update failed")
                 }
@@ -373,9 +373,9 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         }
         
         // query db and update suggestion bar
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             // lookup words in user dictionary that start with word before cursor
             var suggestionList: [String] = []
@@ -386,7 +386,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
             }
             
             // update suggestion bar with those words
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
                 self.suggestedWords = suggestionList
                 self.suggestionBarTable?.reloadData()
@@ -409,23 +409,23 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
             clearSuggestionBar()
             return
         }
-        guard let suffixStart = first where suffixStart.hasPrefix(nnbs) else {
+        guard let suffixStart = first, suffixStart.hasPrefix(nnbs) else {
             return
         }
 
         
         // get word ending and gender
-        var gender = WordGender.Masculine
-        var ending = WordEnding.Nil
+        var gender = WordGender.masculine
+        var ending = WordEnding.nil
         if let previousWord = second {
             (gender, ending) = genderAndEndingFor(previousWord)
         }
         
                 
         // query db and update suggestion bar
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             // lookup words in suffix list that start with word before cursor
             var suggestionList: [String] = []
@@ -437,7 +437,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
             }
             
             // update suggestion bar with those words
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
                 self.suggestedWords = suggestionList
                 self.suggestionBarTable?.reloadData()
@@ -448,17 +448,17 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         
     }
     
-    func genderAndEndingFor(word: String) -> (WordGender, WordEnding) {
+    func genderAndEndingFor(_ word: String) -> (WordGender, WordEnding) {
         
         let scalarString = ScalarString(word)
-        var gender = WordGender.Neutral
-        var ending = WordEnding.Nil
+        var gender = WordGender.neutral
+        var ending = WordEnding.nil
         
         // determine gender
         if renderer.isMasculineWord(scalarString) {
-            gender = WordGender.Masculine
+            gender = WordGender.masculine
         } else if renderer.isFeminineWord(scalarString) {
-            gender = WordGender.Feminine
+            gender = WordGender.feminine
         }
         
         // determine ending
@@ -478,27 +478,27 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
             }
         }
         if renderer.isVowel(endingChar) {
-            ending = WordEnding.Vowel
+            ending = WordEnding.vowel
         } else if renderer.isConsonant(endingChar) {
             if endingChar == MongolUnicodeRenderer.Uni.NA {
-                ending = WordEnding.N
+                ending = WordEnding.n
             } else if renderer.isBGDRS(endingChar) {
-                ending = WordEnding.BigDress
+                ending = WordEnding.bigDress
             } else {
-                ending = WordEnding.OtherConsonant
+                ending = WordEnding.otherConsonant
             }
         }
         
         return (gender, ending)
     }
     
-    func updateSuggestionBarWithFollowingWordsOf(thisWord: String) {
+    func updateSuggestionBarWithFollowingWordsOf(_ thisWord: String) {
 
         
         // query db and update suggestion bar
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             // lookup words in user dictionary that start with word before cursor
             var suggestionList: [String] = []
@@ -509,7 +509,7 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
             }
             
             // update suggestion bar with those words
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
                 self.suggestedWords = suggestionList
                 self.suggestionBarTable?.reloadData()

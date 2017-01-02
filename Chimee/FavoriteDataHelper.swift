@@ -14,7 +14,7 @@ class FavoriteDataHelper: DataHelperProtocol {
     
     static func createTable() throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         // create table
@@ -47,7 +47,7 @@ class FavoriteDataHelper: DataHelperProtocol {
     
     static func insertInitialFavoritesData() throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         // reverse order that they will appear in
@@ -73,23 +73,23 @@ class FavoriteDataHelper: DataHelperProtocol {
             
         } catch _ {
             print("insert error with favorite initialization")
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
         
     }
     
-    static func insert(item: T) throws -> Int64 {
+    static func insert(_ item: T) throws -> Int64 {
         
         // error checking
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         guard
             let dateToInsert = item.dateTime,
             let messageToInsert = item.messageText else {
                 
-                throw DataAccessError.Nil_In_Data
+                throw DataAccessError.nil_In_Data
         }
         
         // do the insert
@@ -97,19 +97,19 @@ class FavoriteDataHelper: DataHelperProtocol {
         do {
             let rowId = try db.run(insert)
             guard rowId > 0 else {
-                throw DataAccessError.Insert_Error
+                throw DataAccessError.insert_Error
             }
             return rowId
         } catch _ {
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
     }
     
-    static func insertMessage(messageToInsert: String) throws -> Int64 {
+    static func insertMessage(_ messageToInsert: String) throws -> Int64 {
         
         // error checking
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
                 
@@ -119,17 +119,17 @@ class FavoriteDataHelper: DataHelperProtocol {
         do {
             let rowId = try db.run(insert)
             guard rowId > 0 else {
-                throw DataAccessError.Insert_Error
+                throw DataAccessError.insert_Error
             }
             return rowId
         } catch _ {
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
     }
     
-    static func updateTimeForFavorite(messageText: String) throws {
+    static func updateTimeForFavorite(_ messageText: String) throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         do {
@@ -144,24 +144,24 @@ class FavoriteDataHelper: DataHelperProtocol {
             
         } catch _ {
             print("some sort of error was thrown")
-            throw DataAccessError.Insert_Error // is this the best error to throw?
+            throw DataAccessError.insert_Error // is this the best error to throw?
         }
         
     }
     
-    static func delete(item: T) throws -> Void {
+    static func delete(_ item: T) throws -> Void {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         if let id = item.messageId {
             let query = favoriteMessageTable.filter(favoriteId == id)
             do {
                 let tmp = try db.run(query.delete())
                 guard tmp == 1 else {
-                    throw DataAccessError.Delete_Error
+                    throw DataAccessError.delete_Error
                 }
             } catch _ {
-                throw DataAccessError.Delete_Error
+                throw DataAccessError.delete_Error
             }
         }
     }
@@ -169,7 +169,7 @@ class FavoriteDataHelper: DataHelperProtocol {
     
     static func findAll() throws -> [T]? {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         var retArray = [T]()
         do {
@@ -179,7 +179,7 @@ class FavoriteDataHelper: DataHelperProtocol {
                 retArray.append(Message(messageId: item[favoriteId], dateTime: item[favoriteDate], messageText: item[favoriteMessage]))
             }
         } catch _ {
-            throw DataAccessError.Search_Error
+            throw DataAccessError.search_Error
         }
         
         return retArray

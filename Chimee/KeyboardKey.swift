@@ -10,13 +10,13 @@ import UIKit
 
 // protocol for communication with keyboard
 protocol KeyboardKeyDelegate: class {
-    func keyTextEntered(keyText: String)
-    func keyFvsTapped(fvs: String)
+    func keyTextEntered(_ keyText: String)
+    func keyFvsTapped(_ fvs: String)
     func keyMvsTapped()
     func keyBackspaceTapped()
     func keyKeyboardTapped()
-    func keyNewKeyboardChosen(type: KeyboardType)
-    func otherAvailableKeyboards(keyboardTypeAndName: [(KeyboardType, String)])
+    func keyNewKeyboardChosen(_ type: KeyboardType)
+    func otherAvailableKeyboards(_ keyboardTypeAndName: [(KeyboardType, String)])
 }
 
 
@@ -25,8 +25,8 @@ class KeyboardKey: UIControl {
     
     weak var delegate: KeyboardKeyDelegate? // probably a keyboard class
     
-    private let backgroundLayer = KeyboardKeyBackgroundLayer()
-    private var oldFrame = CGRectZero
+    fileprivate let backgroundLayer = KeyboardKeyBackgroundLayer()
+    fileprivate var oldFrame = CGRect.zero
     
     // space between the frame edge of the visible border of the key
     var padding: CGFloat {
@@ -35,13 +35,13 @@ class KeyboardKey: UIControl {
         }
     }
 
-    var fillColor = UIColor.whiteColor() {
+    var fillColor = UIColor.white {
         didSet {
             backgroundLayer.setNeedsDisplay()
         }
     }
     
-    var borderColor = UIColor.blackColor() {
+    var borderColor = UIColor.black {
         didSet {
             backgroundLayer.setNeedsDisplay()
         }
@@ -68,7 +68,7 @@ class KeyboardKey: UIControl {
     override var frame: CGRect {
         didSet {
             // only update frames if non-zero and changed
-            if frame != CGRectZero && frame != oldFrame {
+            if frame != CGRect.zero && frame != oldFrame {
                 updateBackgroundFrame()
             }
         }
@@ -78,7 +78,7 @@ class KeyboardKey: UIControl {
         
         // Background layer
         backgroundLayer.keyboardKey = self
-        backgroundLayer.contentsScale = UIScreen.mainScreen().scale
+        backgroundLayer.contentsScale = UIScreen.main.scale
         layer.addSublayer(backgroundLayer)
         
         
@@ -103,27 +103,27 @@ class KeyboardKey: UIControl {
     
     // MARK: - Other methods
     
-    func longPress(guesture: UILongPressGestureRecognizer) {
-        if guesture.state == UIGestureRecognizerState.Began {
+    func longPress(_ guesture: UILongPressGestureRecognizer) {
+        if guesture.state == UIGestureRecognizerState.began {
             
             backgroundLayer.highlighted = false
             longPressBegun(guesture)
             
-        } else if guesture.state == UIGestureRecognizerState.Changed {
+        } else if guesture.state == UIGestureRecognizerState.changed {
             
             longPressStateChanged(guesture)
-        } else if guesture.state == UIGestureRecognizerState.Ended {
+        } else if guesture.state == UIGestureRecognizerState.ended {
             longPressEnded()
-        } else if guesture.state == UIGestureRecognizerState.Cancelled {
+        } else if guesture.state == UIGestureRecognizerState.cancelled {
             longPressCancelled()
         }
     }
     
-    func longPressBegun(guesture: UILongPressGestureRecognizer) {
+    func longPressBegun(_ guesture: UILongPressGestureRecognizer) {
         // this method is for subclasses to override
     }
     
-    func longPressStateChanged(guesture: UILongPressGestureRecognizer) {
+    func longPressStateChanged(_ guesture: UILongPressGestureRecognizer) {
         // this method is for subclasses to override
     }
     
@@ -137,13 +137,13 @@ class KeyboardKey: UIControl {
     
     // MARK: - Overrides
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         
         backgroundLayer.highlighted = true
         return backgroundLayer.highlighted
     }
     
-    override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         
         backgroundLayer.highlighted = false
     }
@@ -161,7 +161,7 @@ class KeyboardKeyBackgroundLayer: CALayer {
     weak var keyboardKey: KeyboardKey?
     let padding: CGFloat = 2.0
     
-    override func drawInContext(ctx: CGContext) {
+    override func draw(in ctx: CGContext) {
         if let key = keyboardKey {
             
             let keyFrame = bounds.insetBy(dx: padding, dy: padding)
@@ -169,20 +169,20 @@ class KeyboardKeyBackgroundLayer: CALayer {
             //let borderColor = key.borderColor.CGColor
             
             // Fill
-            CGContextSetFillColorWithColor(ctx, key.fillColor.CGColor)
-            CGContextAddPath(ctx, keyPath.CGPath)
-            CGContextFillPath(ctx)
+            ctx.setFillColor(key.fillColor.cgColor)
+            ctx.addPath(keyPath.cgPath)
+            ctx.fillPath()
             
             // Outline
-            CGContextSetStrokeColorWithColor(ctx, key.borderColor.CGColor)
-            CGContextSetLineWidth(ctx, 0.5)
-            CGContextAddPath(ctx, keyPath.CGPath)
-            CGContextStrokePath(ctx)
+            ctx.setStrokeColor(key.borderColor.cgColor)
+            ctx.setLineWidth(0.5)
+            ctx.addPath(keyPath.cgPath)
+            ctx.strokePath()
             
             if highlighted {
-                CGContextSetFillColorWithColor(ctx, UIColor(white: 0.0, alpha: 0.1).CGColor)
-                CGContextAddPath(ctx, keyPath.CGPath)
-                CGContextFillPath(ctx)
+                ctx.setFillColor(UIColor(white: 0.0, alpha: 0.1).cgColor)
+                ctx.addPath(keyPath.cgPath)
+                ctx.fillPath()
             }
             
         }

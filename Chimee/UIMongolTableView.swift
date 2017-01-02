@@ -6,9 +6,9 @@ import UIKit
     // MARK:- Unique to TableView
     
     // ********* Unique to TableView *********
-    private var view = UITableView()
-    private let rotationView = UIView()
-    private var userInteractionEnabledForSubviews = true
+    fileprivate var view = UITableView()
+    fileprivate let rotationView = UIView()
+    fileprivate var userInteractionEnabledForSubviews = true
     
     // read only refernce to the underlying tableview
     var tableView: UITableView {
@@ -35,8 +35,8 @@ import UIKit
         rotationView.addSubview(view)
         
         view.backgroundColor = self.backgroundColor
-        view.layoutMargins = UIEdgeInsetsZero
-        view.separatorInset = UIEdgeInsetsZero
+        view.layoutMargins = UIEdgeInsets.zero
+        view.separatorInset = UIEdgeInsets.zero
     }
     
     // FIXME: @IBOutlet still can't be set in IB
@@ -61,40 +61,40 @@ import UIKit
     
     @IBInspectable var scrollEnabled: Bool {
         get {
-            return view.scrollEnabled
+            return view.isScrollEnabled
         }
         set {
-            view.scrollEnabled = newValue
+            view.isScrollEnabled = newValue
         }
     }
     
     
-    func scrollToRowAtIndexPath(indexPath: NSIndexPath, atScrollPosition: UITableViewScrollPosition, animated: Bool) {
-        view.scrollToRowAtIndexPath(indexPath, atScrollPosition: atScrollPosition, animated: animated)
+    func scrollToRowAtIndexPath(_ indexPath: IndexPath, atScrollPosition: UITableViewScrollPosition, animated: Bool) {
+        view.scrollToRow(at: indexPath, at: atScrollPosition, animated: animated)
     }
     
-    func registerClass(cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
-        view.registerClass(cellClass, forCellReuseIdentifier: identifier)
+    func registerClass(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+        view.register(cellClass, forCellReuseIdentifier: identifier)
     }
     
-    func dequeueReusableCellWithIdentifier(identifier: String) -> UITableViewCell? {
-        return view.dequeueReusableCellWithIdentifier(identifier)
+    func dequeueReusableCellWithIdentifier(_ identifier: String) -> UITableViewCell? {
+        return view.dequeueReusableCell(withIdentifier: identifier)
     }
     
     func reloadData() {
         view.reloadData()
     }
     
-    func insertRowsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func insertRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         
-        view.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        view.insertRows(at: indexPaths, with: animation)
         
         
     }
     
-    func deleteRowsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func deleteRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         
-        view.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        view.deleteRows(at: indexPaths, with: animation)
     }
     
     
@@ -125,8 +125,8 @@ import UIKit
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        rotationView.transform = CGAffineTransformIdentity
-        rotationView.frame = CGRect(origin: CGPointZero, size: CGSize(width: self.bounds.height, height: self.bounds.width))
+        rotationView.transform = CGAffineTransform.identity
+        rotationView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: self.bounds.height, height: self.bounds.width))
         rotationView.transform = translateRotateFlip()
         
         view.frame = rotationView.bounds
@@ -135,14 +135,14 @@ import UIKit
     
     func translateRotateFlip() -> CGAffineTransform {
         
-        var transform = CGAffineTransformIdentity
+        var transform = CGAffineTransform.identity
         
         // translate to new center
-        transform = CGAffineTransformTranslate(transform, (self.bounds.width / 2)-(self.bounds.height / 2), (self.bounds.height / 2)-(self.bounds.width / 2))
+        transform = transform.translatedBy(x: (self.bounds.width / 2)-(self.bounds.height / 2), y: (self.bounds.height / 2)-(self.bounds.width / 2))
         // rotate counterclockwise around center
-        transform = CGAffineTransformRotate(transform, CGFloat(-M_PI_2))
+        transform = transform.rotated(by: CGFloat(-M_PI_2))
         // flip vertically
-        transform = CGAffineTransformScale(transform, -1, 1)
+        transform = transform.scaledBy(x: -1, y: 1)
         
         return transform
     }

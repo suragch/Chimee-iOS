@@ -39,7 +39,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - Actions
     
-    @IBAction func deleteAllButtonTapped(sender: UIBarButtonItem) {
+    @IBAction func deleteAllButtonTapped(_ sender: UIBarButtonItem) {
         
         let title = "ᠤᠰᠠᠳᠬᠠᠬᠤ"
         let message = "ᠲᠠ ᠦᠨᠡᠭᠡᠷ ᠪᠦᠬᠦ ᠵᠠᠬᠢᠵ᠎ᠠ ᠶᠢ ᠤᠰᠠᠳᠬᠠᠬᠤ ᠤᠤ?"
@@ -64,18 +64,18 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - UITableView
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messages.count
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // set up the cells for the table view
         let cell: UITableViewCell = self.mongolTableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell!
         
         // TODO: use a custom UIMongolTableViewCell to render and choose font
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsets.zero
         if let text = self.messages[indexPath.row].messageText {
             cell.textLabel?.text = renderer.unicodeToGlyphs(text)
             cell.textLabel?.font = UIFont(name: mongolFont, size: fontSize)
@@ -85,29 +85,28 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let text = messages[indexPath.row].messageText {
             self.delegate?.insertMessage(text)
         }
-        self.navigationController?.popToRootViewControllerAnimated(true)
-        
+        _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             
             deleteHistoryMessageFromDatabase(messages[indexPath.row], indexPath: indexPath)
             
         }
     }
     
-    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "|"
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         let currentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
@@ -126,9 +125,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             return
         }
         
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             var thisBatchOfMessages: [Message]?
             let start = self.offset
@@ -140,11 +139,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             
             // update TableView with favorite messages
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
                 if let newMessages = thisBatchOfMessages {
                     
-                    self.messages.appendContentsOf(newMessages)
+                    self.messages.append(contentsOf: newMessages)
                     self.mongolTableView.reloadData()
                     
                     if newMessages.count < self.messagesPerBatch {
@@ -161,12 +160,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
     }
     
-    func deleteHistoryMessageFromDatabase(item: Message, indexPath: NSIndexPath) {
+    func deleteHistoryMessageFromDatabase(_ item: Message, indexPath: IndexPath) {
         
         // do on background thread
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             
             do {
@@ -177,9 +176,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 print("message delete failed")
             }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.messages.removeAtIndex(indexPath.row)
-                self.mongolTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.messages.remove(at: indexPath.row)
+                self.mongolTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .fade)
             })
             
         })
@@ -188,9 +187,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func deleteAllHistoryMessagesFromDatabase() {
         
         // do on background thread
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             do {
                 

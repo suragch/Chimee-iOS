@@ -15,7 +15,7 @@ class SuffixListDataHelper: DataHelperProtocol {
     
     static func createTable() throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         // create table
@@ -45,51 +45,51 @@ class SuffixListDataHelper: DataHelperProtocol {
     
     static func insertInitialData() throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         let data: [ (suffix: String, gender: WordGender, type: SuffixType) ] = [
-            (" ᠶᠢᠨ", .Neutral, .VowelOnly), // yin
-            (" ᠤᠨ", .Masculine, .ConsonantNonN), // on
-            (" ᠦᠨ", .Feminine, .ConsonantNonN), // un
-            (" ᠤ", .Masculine, .NOnly), //o
-            (" ᠦ", .Feminine, .NOnly), //u
-            (" ᠢ", .Neutral, .ConsonantsAll), //i
-            (" ᠶᠢ", .Neutral, .VowelOnly), //yi
-            (" ᠳᠤ", .Masculine, .NotBigDress), //do
-            (" ᠳᠦ", .Feminine, .NotBigDress), //du
-            (" ᠲᠤ", .Masculine, .BigDress), //to
-            (" ᠲᠦ", .Feminine, .BigDress), //tu
-            (" ᠠᠴᠠ", .Masculine, .All), //acha
-            (" ᠡᠴᠡ", .Feminine, .All), //eche
-            (" ᠪᠠᠷ", .Masculine, .VowelOnly), //bar
-            (" ᠪᠡᠷ", .Feminine, .VowelOnly), //ber
-            (" ᠢᠶᠠᠷ", .Masculine, .ConsonantsAll), //iyar
-            (" ᠢᠶᠡᠷ", .Feminine, .ConsonantsAll), //iyer
-            (" ᠲᠠᠶ", .Masculine, .All), //tai
-            (" ᠲᠡᠶ", .Feminine, .All), //tei
-            (" ᠢᠶᠠᠨ", .Masculine, .ConsonantsAll), //iyan
-            (" ᠢᠶᠡᠨ", .Feminine, .ConsonantsAll), //iyen
-            (" ᠪᠠᠨ", .Masculine, .VowelOnly), //ban
-            (" ᠪᠡᠨ", .Feminine, .VowelOnly), //ben
-            (" ᠤᠤ", .Masculine, .All), //oo
-            (" ᠦᠦ", .Feminine, .All), //uu
-            (" ᠶᠤᠭᠠᠨ", .Masculine, .All), //yogan
-            (" ᠶᠦᠭᠡᠨ", .Feminine, .All), //yugen
-            (" ᠳᠠᠭᠠᠨ", .Masculine, .NotBigDress), //dagan
-            (" ᠳᠡᠭᠡᠨ", .Feminine, .NotBigDress), //degen
-            (" ᠲᠠᠭᠠᠨ", .Masculine, .BigDress), //tagan
-            (" ᠲᠡᠭᠡᠨ", .Feminine, .BigDress), //tegen
-            (" ᠠᠴᠠᠭᠠᠨ", .Masculine, .All), //achagan
-            (" ᠡᠴᠡᠭᠡᠨ", .Feminine, .All), //echegen
-            (" ᠲᠠᠶᠢᠭᠠᠨ", .Masculine, .All), //taigan
-            (" ᠲᠡᠶᠢᠭᠡᠨ", .Feminine, .All), //teigen
-            (" ᠤᠳ", .Masculine, .All), //od
-            (" ᠦᠳ", .Feminine, .All), //ud
-            (" ᠨᠤᠭᠤᠳ", .Masculine, .All), //nogod
-            (" ᠨᠦᠭᠦᠳ", .Feminine, .All), //nugud
-            (" ᠨᠠᠷ", .Masculine, .All), //nar
-            (" ᠨᠡᠷ", .Feminine, .All) //ner
+            (" ᠶᠢᠨ", .neutral, .vowelOnly), // yin
+            (" ᠤᠨ", .masculine, .consonantNonN), // on
+            (" ᠦᠨ", .feminine, .consonantNonN), // un
+            (" ᠤ", .masculine, .nOnly), //o
+            (" ᠦ", .feminine, .nOnly), //u
+            (" ᠢ", .neutral, .consonantsAll), //i
+            (" ᠶᠢ", .neutral, .vowelOnly), //yi
+            (" ᠳᠤ", .masculine, .notBigDress), //do
+            (" ᠳᠦ", .feminine, .notBigDress), //du
+            (" ᠲᠤ", .masculine, .bigDress), //to
+            (" ᠲᠦ", .feminine, .bigDress), //tu
+            (" ᠠᠴᠠ", .masculine, .all), //acha
+            (" ᠡᠴᠡ", .feminine, .all), //eche
+            (" ᠪᠠᠷ", .masculine, .vowelOnly), //bar
+            (" ᠪᠡᠷ", .feminine, .vowelOnly), //ber
+            (" ᠢᠶᠠᠷ", .masculine, .consonantsAll), //iyar
+            (" ᠢᠶᠡᠷ", .feminine, .consonantsAll), //iyer
+            (" ᠲᠠᠶ", .masculine, .all), //tai
+            (" ᠲᠡᠶ", .feminine, .all), //tei
+            (" ᠢᠶᠠᠨ", .masculine, .consonantsAll), //iyan
+            (" ᠢᠶᠡᠨ", .feminine, .consonantsAll), //iyen
+            (" ᠪᠠᠨ", .masculine, .vowelOnly), //ban
+            (" ᠪᠡᠨ", .feminine, .vowelOnly), //ben
+            (" ᠤᠤ", .masculine, .all), //oo
+            (" ᠦᠦ", .feminine, .all), //uu
+            (" ᠶᠤᠭᠠᠨ", .masculine, .all), //yogan
+            (" ᠶᠦᠭᠡᠨ", .feminine, .all), //yugen
+            (" ᠳᠠᠭᠠᠨ", .masculine, .notBigDress), //dagan
+            (" ᠳᠡᠭᠡᠨ", .feminine, .notBigDress), //degen
+            (" ᠲᠠᠭᠠᠨ", .masculine, .bigDress), //tagan
+            (" ᠲᠡᠭᠡᠨ", .feminine, .bigDress), //tegen
+            (" ᠠᠴᠠᠭᠠᠨ", .masculine, .all), //achagan
+            (" ᠡᠴᠡᠭᠡᠨ", .feminine, .all), //echegen
+            (" ᠲᠠᠶᠢᠭᠠᠨ", .masculine, .all), //taigan
+            (" ᠲᠡᠶᠢᠭᠡᠨ", .feminine, .all), //teigen
+            (" ᠤᠳ", .masculine, .all), //od
+            (" ᠦᠳ", .feminine, .all), //ud
+            (" ᠨᠤᠭᠤᠳ", .masculine, .all), //nogod
+            (" ᠨᠦᠭᠦᠳ", .feminine, .all), //nugud
+            (" ᠨᠠᠷ", .masculine, .all), //nar
+            (" ᠨᠡᠷ", .feminine, .all) //ner
         ]
         
         do {
@@ -103,16 +103,16 @@ class SuffixListDataHelper: DataHelperProtocol {
             
         } catch _ {
             print("insert error with suffix initialization")
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
         
     }
     
-    static func insert(item: T) throws -> Int64 {
+    static func insert(_ item: T) throws -> Int64 {
         
         // error checking
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         guard
@@ -121,7 +121,7 @@ class SuffixListDataHelper: DataHelperProtocol {
             let endingToInsert = item.endingType,
             let frequencyToInsert = item.frequency else {
                 
-                throw DataAccessError.Nil_In_Data
+                throw DataAccessError.nil_In_Data
         }
         
         // do the insert
@@ -129,17 +129,17 @@ class SuffixListDataHelper: DataHelperProtocol {
         do {
             let rowId = try db.run(insert)
             guard rowId > 0 else {
-                throw DataAccessError.Insert_Error
+                throw DataAccessError.insert_Error
             }
             return rowId
         } catch _ {
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
     }
     
-    static func updateFrequencyForSuffix(suffixToUpdate: String) throws {
+    static func updateFrequencyForSuffix(_ suffixToUpdate: String) throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         do {
@@ -153,32 +153,32 @@ class SuffixListDataHelper: DataHelperProtocol {
             
         } catch _ {
             print("some sort of error was thrown")
-            throw DataAccessError.Insert_Error // is this the best error to throw?
+            throw DataAccessError.insert_Error // is this the best error to throw?
         }
         
     }
     
-    static func delete (item: T) throws -> Void {
+    static func delete (_ item: T) throws -> Void {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         if let id = item.suffixId {
             let query = suffixList.filter(suffixId == id)
             do {
                 let tmp = try db.run(query.delete())
                 guard tmp == 1 else {
-                    throw DataAccessError.Delete_Error
+                    throw DataAccessError.delete_Error
                 }
             } catch _ {
-                throw DataAccessError.Delete_Error
+                throw DataAccessError.delete_Error
             }
         }
     }
     
-    static func findSuffixesBeginningWith(suffixStart: String, withGender gender: WordGender, andEnding ending: WordEnding) throws -> [String] {
+    static func findSuffixesBeginningWith(_ suffixStart: String, withGender gender: WordGender, andEnding ending: WordEnding) throws -> [String] {
         
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         let searchPrefix = suffixStart + "%"
@@ -187,92 +187,92 @@ class SuffixListDataHelper: DataHelperProtocol {
        
         
         switch ending {
-        case WordEnding.Vowel:
+        case WordEnding.vowel:
             
             // filter gender
-            if gender == WordGender.Masculine {
+            if gender == WordGender.masculine {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Feminine.rawValue &&
-                    (self.endingType == SuffixType.VowelOnly.rawValue ||
-                    self.endingType == SuffixType.NotBigDress.rawValue ||
-                    self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.feminine.rawValue &&
+                    (self.endingType == SuffixType.vowelOnly.rawValue ||
+                    self.endingType == SuffixType.notBigDress.rawValue ||
+                    self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             } else {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Masculine.rawValue &&
-                    (self.endingType == SuffixType.VowelOnly.rawValue ||
-                        self.endingType == SuffixType.NotBigDress.rawValue ||
-                        self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.masculine.rawValue &&
+                    (self.endingType == SuffixType.vowelOnly.rawValue ||
+                        self.endingType == SuffixType.notBigDress.rawValue ||
+                        self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             }
             
-        case WordEnding.N:
+        case WordEnding.n:
             
             // filter gender
-            if gender == WordGender.Masculine {
+            if gender == WordGender.masculine {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Feminine.rawValue &&
-                    (self.endingType == SuffixType.NOnly.rawValue ||
-                        self.endingType == SuffixType.ConsonantsAll.rawValue ||
-                        self.endingType == SuffixType.NotBigDress.rawValue ||
-                        self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.feminine.rawValue &&
+                    (self.endingType == SuffixType.nOnly.rawValue ||
+                        self.endingType == SuffixType.consonantsAll.rawValue ||
+                        self.endingType == SuffixType.notBigDress.rawValue ||
+                        self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             } else {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Masculine.rawValue &&
-                    (self.endingType == SuffixType.NOnly.rawValue ||
-                        self.endingType == SuffixType.ConsonantsAll.rawValue ||
-                        self.endingType == SuffixType.NotBigDress.rawValue ||
-                        self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.masculine.rawValue &&
+                    (self.endingType == SuffixType.nOnly.rawValue ||
+                        self.endingType == SuffixType.consonantsAll.rawValue ||
+                        self.endingType == SuffixType.notBigDress.rawValue ||
+                        self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             }
             
-        case WordEnding.BigDress:
+        case WordEnding.bigDress:
             
             
-            if gender == WordGender.Masculine {
+            if gender == WordGender.masculine {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Feminine.rawValue &&
-                    (self.endingType == SuffixType.ConsonantNonN.rawValue ||
-                        self.endingType == SuffixType.ConsonantsAll.rawValue ||
-                        self.endingType == SuffixType.BigDress.rawValue ||
-                        self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.feminine.rawValue &&
+                    (self.endingType == SuffixType.consonantNonN.rawValue ||
+                        self.endingType == SuffixType.consonantsAll.rawValue ||
+                        self.endingType == SuffixType.bigDress.rawValue ||
+                        self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             } else {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Masculine.rawValue &&
-                    (self.endingType == SuffixType.ConsonantNonN.rawValue ||
-                        self.endingType == SuffixType.ConsonantsAll.rawValue ||
-                        self.endingType == SuffixType.BigDress.rawValue ||
-                        self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.masculine.rawValue &&
+                    (self.endingType == SuffixType.consonantNonN.rawValue ||
+                        self.endingType == SuffixType.consonantsAll.rawValue ||
+                        self.endingType == SuffixType.bigDress.rawValue ||
+                        self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             }
             
-        case WordEnding.OtherConsonant: // besides N or BGDRS
+        case WordEnding.otherConsonant: // besides N or BGDRS
             
             
-            if gender == WordGender.Masculine {
+            if gender == WordGender.masculine {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Feminine.rawValue &&
-                    (self.endingType == SuffixType.ConsonantNonN.rawValue ||
-                        self.endingType == SuffixType.ConsonantsAll.rawValue ||
-                        self.endingType == SuffixType.NotBigDress.rawValue ||
-                        self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.feminine.rawValue &&
+                    (self.endingType == SuffixType.consonantNonN.rawValue ||
+                        self.endingType == SuffixType.consonantsAll.rawValue ||
+                        self.endingType == SuffixType.notBigDress.rawValue ||
+                        self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             } else {
                 query = suffixList.filter(suffix.like(searchPrefix) &&
-                    self.gender != WordGender.Masculine.rawValue &&
-                    (self.endingType == SuffixType.ConsonantNonN.rawValue ||
-                        self.endingType == SuffixType.ConsonantsAll.rawValue ||
-                        self.endingType == SuffixType.NotBigDress.rawValue ||
-                        self.endingType == SuffixType.All.rawValue))
+                    self.gender != WordGender.masculine.rawValue &&
+                    (self.endingType == SuffixType.consonantNonN.rawValue ||
+                        self.endingType == SuffixType.consonantsAll.rawValue ||
+                        self.endingType == SuffixType.notBigDress.rawValue ||
+                        self.endingType == SuffixType.all.rawValue))
                     .order(frequency.desc)
             }
             
-        case WordEnding.Nil:
+        case WordEnding.nil:
 
             query = suffixList.filter(suffix.like(searchPrefix) &&
-                self.gender != WordGender.Masculine.rawValue).order(frequency.desc)
+                self.gender != WordGender.masculine.rawValue).order(frequency.desc)
 
         }
         
@@ -286,7 +286,7 @@ class SuffixListDataHelper: DataHelperProtocol {
     
     static func findAll() throws -> [T]? {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         var retArray = [T]()
         do {
@@ -295,7 +295,7 @@ class SuffixListDataHelper: DataHelperProtocol {
                 retArray.append(MongolSuffix(suffixId: item[suffixId], suffix: item[suffix], gender: item[gender], endingType: item[endingType], frequency: item[frequency]))
             }
         } catch _ {
-            throw DataAccessError.Search_Error
+            throw DataAccessError.search_Error
         }
         
         return retArray

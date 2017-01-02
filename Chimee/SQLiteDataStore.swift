@@ -2,12 +2,12 @@
 import Swift
 import SQLite
 
-enum DataAccessError: ErrorType {
-    case Datastore_Connection_Error
-    case Insert_Error
-    case Delete_Error
-    case Search_Error
-    case Nil_In_Data
+enum DataAccessError: Error {
+    case datastore_Connection_Error
+    case insert_Error
+    case delete_Error
+    case search_Error
+    case nil_In_Data
 }
 
 
@@ -18,18 +18,21 @@ class SQLiteDataStore {
     static let sharedInstance = SQLiteDataStore()
     let ChimeeDB: Connection?
     
-    private init() {
+    fileprivate init() {
         
         let filename = "db.sqlite"
         
-        guard let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first else {
+        guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             ChimeeDB = nil
             return
         }
-        guard let path = directoryURL.URLByAppendingPathComponent(filename).path else {
-            ChimeeDB = nil
-            return
-        }
+        
+        let path = directoryURL.appendingPathComponent(filename).path
+        
+//        guard let path = directoryURL.appendingPathComponent(filename) else {
+//            ChimeeDB = nil
+//            return
+//        }
         
         do {
             ChimeeDB = try Connection(path)
@@ -48,7 +51,7 @@ class SQLiteDataStore {
             
             
         } catch {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
     }
     
@@ -59,7 +62,7 @@ class SQLiteDataStore {
             // create any other future tables here
             
         } catch {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
     }
 }

@@ -13,7 +13,7 @@ class AboutViewController: UIViewController {
         
         // get current version number
         let version =
-            NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
+            Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
                 as? String
         chimeeVersionLabel.text = "Chimee \(version ?? "")"
         

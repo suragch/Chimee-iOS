@@ -5,14 +5,14 @@ import UIKit
 
 class MongolTextStorage {
     
-    private var unicodeText = ScalarString()
-    private let renderer = MongolUnicodeRenderer.sharedInstance
-    private let cursorHolder = MongolUnicodeRenderer.Glyph.CURSOR_HOLDER
-    private var unicodeIndexForCursor = -1
-    private let space = ScalarString(" ").charAt(0) // space
-    private let questionMark = ScalarString("?").charAt(0)
-    private let exclamationPoint = ScalarString("!").charAt(0)
-    private let newLine = ScalarString("\n").charAt(0)
+    fileprivate var unicodeText = ScalarString()
+    fileprivate let renderer = MongolUnicodeRenderer.sharedInstance
+    fileprivate let cursorHolder = MongolUnicodeRenderer.Glyph.CURSOR_HOLDER
+    fileprivate var unicodeIndexForCursor = -1
+    fileprivate let space = ScalarString(" ").charAt(0) // space
+    fileprivate let questionMark = ScalarString("?").charAt(0)
+    fileprivate let exclamationPoint = ScalarString("!").charAt(0)
+    fileprivate let newLine = ScalarString("\n").charAt(0)
     
     // MARK: - public API
     
@@ -46,7 +46,7 @@ class MongolTextStorage {
         glyphIndexForCursor = 0
     }
     
-    func deleteBackwardsAtGlyphRange(textRange: NSRange) {
+    func deleteBackwardsAtGlyphRange(_ textRange: NSRange) {
         
         // TODO: double delete for FVS, MVS, NNBSP, ZWJ
         
@@ -89,7 +89,7 @@ class MongolTextStorage {
        
     }
     
-    func isFormattingChar(char: UInt32) -> Bool {
+    func isFormattingChar(_ char: UInt32) -> Bool {
         
         return
             char == MongolUnicodeRenderer.Uni.FVS1 ||
@@ -99,7 +99,7 @@ class MongolTextStorage {
             char == MongolUnicodeRenderer.Uni.ZWJ
     }
     
-    func unicodeForGlyphRange(textRange: NSRange) -> String? {
+    func unicodeForGlyphRange(_ textRange: NSRange) -> String? {
         
         if textRange.length == 0 { // caret position
             
@@ -116,7 +116,7 @@ class MongolTextStorage {
         }
     }
     
-    func insertUnicodeForGlyphRange(textRange: NSRange, unicodeToInsert: String) {
+    func insertUnicodeForGlyphRange(_ textRange: NSRange, unicodeToInsert: String) {
         // FIXME: this method assumes no emoji
         let newText = ScalarString(unicodeToInsert)
         
@@ -148,7 +148,7 @@ class MongolTextStorage {
  
     }
     
-    func replaceWordAtCursorWith(replacementString: String, atGlyphIndex glyphIndex: Int) {
+    func replaceWordAtCursorWith(_ replacementString: String, atGlyphIndex glyphIndex: Int) {
         
         let myReplacementString = ScalarString(replacementString)
         
@@ -164,7 +164,7 @@ class MongolTextStorage {
         // get the start index
         var startIndex = originalPosition
         if originalPosition > 0 {
-            for i in (originalPosition - 1).stride(through: 0, by: -1) {
+            for i in stride(from: (originalPosition - 1), through: 0, by: -1) {
                 
                 if unicodeText.charAt(i) == MongolUnicodeRenderer.Uni.NNBS {
                     // Stop at NNBS.
@@ -207,7 +207,7 @@ class MongolTextStorage {
         unicodeIndexForCursor = startIndex + myReplacementString.length
     }
     
-    func unicodeCharBeforeCursor(glyphIndex: Int) -> String? {
+    func unicodeCharBeforeCursor(_ glyphIndex: Int) -> String? {
         
         // if glyph index has changed, need to update unicode index
         if glyphIndex != glyphIndexForCursor {
@@ -227,7 +227,7 @@ class MongolTextStorage {
     /// - warning: Only gets called if cursor is adjacent to a Mongolian character
     /// - parameter glyphIndex: glyph index (not unicode index) of the cursor
     /// - returns: an optional string of the Mongolian characters before cursor
-    func unicodeOneWordBeforeCursor(glyphIndex: Int) -> String? {
+    func unicodeOneWordBeforeCursor(_ glyphIndex: Int) -> String? {
         
         // if glyph index has changed, need to update unicode index
         if glyphIndex != glyphIndexForCursor {
@@ -247,7 +247,7 @@ class MongolTextStorage {
         // Get the word
         //var firstWordHasEnded = false // flag if bewteen words, allow single space/NNBS
         var word = ScalarString()
-        for i in startPosition.stride(through: 0, by: -1) {
+        for i in stride(from: startPosition, through: 0, by: -1) {
             
             if unicodeText.charAt(i) == MongolUnicodeRenderer.Uni.NNBS {
                 // Stop at NNBS.
@@ -271,7 +271,7 @@ class MongolTextStorage {
     /// - warning: Only gets called if cursor if after a Mongolian character
     /// - parameter glyphIndex: glyph index (not unicode index) of the cursor
     /// - returns: tuple of optional strings: (first word from cursor, second word from cursor)
-    func unicodeTwoWordsBeforeCursor(glyphIndex: Int) -> (String?, String?) {
+    func unicodeTwoWordsBeforeCursor(_ glyphIndex: Int) -> (String?, String?) {
         
         // if glyph index has changed, need to update unicode index
         if glyphIndex != glyphIndexForCursor {
@@ -294,7 +294,7 @@ class MongolTextStorage {
         // Get the words
         var firstWordHasEnded = false // flag if bewteen words, allow single space/NNBS
         var words = ScalarString()
-        for i in startPosition.stride(through: 0, by: -1) {
+        for i in stride(from: startPosition, through: 0, by: -1) {
             
             if unicodeText.charAt(i) == MongolUnicodeRenderer.Uni.NNBS {
                 // Stop at NNBS.

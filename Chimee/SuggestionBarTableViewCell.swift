@@ -16,18 +16,18 @@ class SuggestionBarTableViewCell: UITableViewCell {
         
         self.mongolLabel.translatesAutoresizingMaskIntoConstraints = false
         self.mongolLabel.centerText = false
-        self.mongolLabel.backgroundColor = UIColor.clearColor()
-        self.contentView.backgroundColor = UIColor.clearColor()
+        self.mongolLabel.backgroundColor = UIColor.clear
+        self.contentView.backgroundColor = UIColor.clear
         self.contentView.addSubview(mongolLabel)
         
         // Constraints
-        let topConstraint = NSLayoutConstraint(item: mongolLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.contentView, attribute: NSLayoutAttribute.TopMargin, multiplier: 1.0, constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: mongolLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.contentView, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: 0)
-        let horizontalCenterConstraint = NSLayoutConstraint(item: mongolLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.contentView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let topConstraint = NSLayoutConstraint(item: mongolLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.topMargin, multiplier: 1.0, constant: 0)
+        let bottomConstraint = NSLayoutConstraint(item: mongolLabel, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.bottomMargin, multiplier: 1.0, constant: 0)
+        let horizontalCenterConstraint = NSLayoutConstraint(item: mongolLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         self.contentView.addConstraints([ topConstraint, bottomConstraint, horizontalCenterConstraint ])
     }
     
-    override internal class func requiresConstraintBasedLayout() -> Bool {
+    override internal class var requiresConstraintBasedLayout : Bool {
         return true
     }
 }

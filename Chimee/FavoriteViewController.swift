@@ -37,9 +37,9 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadFavorites() {
         
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             // lookup words in user dictionary that start with word before cursor
             var favoritesList: [Message]?
@@ -50,7 +50,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             // update TableView with favorite messages
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
                 self.messages = favoritesList
                 self.mongolTableView?.reloadData()
@@ -65,7 +65,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: - Actions
     
-    @IBAction func addFavoriteButtonTapped(sender: UIBarButtonItem) {
+    @IBAction func addFavoriteButtonTapped(_ sender: UIBarButtonItem) {
         
         guard currentMessage.characters.count > 0 else {
             // TODO: notify user that they have to write sth
@@ -77,24 +77,24 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    @IBAction func historyButtonTapped(sender: UIBarButtonItem) {
+    @IBAction func historyButtonTapped(_ sender: UIBarButtonItem) {
     }
     
     
     
     // MARK: - UITableView 
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messages?.count ?? 0;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // set up the cells for the table view
         let cell: UITableViewCell = self.mongolTableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell!
         
         // TODO: use a custom UIMongolTableViewCell to render and choose font
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsets.zero
         if let text = self.messages?[indexPath.row].messageText {
             cell.textLabel?.text = renderer.unicodeToGlyphs(text)
             cell.textLabel?.font = UIFont(name: mongolFont, size: fontSize)
@@ -104,19 +104,19 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let text = messages?[indexPath.row].messageText {
             self.delegate?.insertMessage(text)
             updateTimeForFavoriteMessage(text)
         }
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
        
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             
             if let message = messages?[indexPath.row] {
                 deleteFavoriteMessageFromDatabase(message, indexPath: indexPath)
@@ -124,7 +124,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "|"
     }
     
@@ -132,21 +132,21 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: - Database
     
-    func addFavoriteMessageToDatabase(message: String) {
+    func addFavoriteMessageToDatabase(_ message: String) {
         
         guard message.characters.count > 0 else {
             return
         }
     
         // do on background thread
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             
             do {
                 
-                    try FavoriteDataHelper.insertMessage(message)
+                    _ = try FavoriteDataHelper.insertMessage(message)
                     self.messages = try FavoriteDataHelper.findAll()
                 
             } catch _ {
@@ -154,23 +154,23 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             // update TableView with favorite messages
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
                 // insert row in table
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                self.mongolTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.mongolTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.fade)
             })
             
         })
     
     }
     
-    func deleteFavoriteMessageFromDatabase(item: Message, indexPath: NSIndexPath) {
+    func deleteFavoriteMessageFromDatabase(_ item: Message, indexPath: IndexPath) {
         
         // do on background thread
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             
             do {
@@ -183,20 +183,20 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             // update TableView with favorite messages
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
-                self.mongolTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                self.mongolTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .fade)
             })
             
         })
     }
     
-    func updateTimeForFavoriteMessage(messageText: String) {
+    func updateTimeForFavoriteMessage(_ messageText: String) {
         
         // do on background thread
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             
             do {

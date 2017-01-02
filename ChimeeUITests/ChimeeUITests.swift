@@ -30,88 +30,88 @@ class ChimeeUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.scrollViews.otherElements.icons["Chimee"].tap()
-        XCUIDevice.sharedDevice().orientation = .Portrait
-        XCUIDevice.sharedDevice().orientation = .Portrait
+        XCUIDevice.shared().orientation = .portrait
+        XCUIDevice.shared().orientation = .portrait
         
-        let element25 = app.otherElements.containingType(.NavigationBar, identifier:"Chimee.MainView").childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(2).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        let element = element25.childrenMatchingType(.Other).elementBoundByIndex(0)
+        let element25 = app.otherElements.containing(.navigationBar, identifier:"Chimee.MainView").children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 2).children(matching: .other).element.children(matching: .other).element
+        let element = element25.children(matching: .other).element(boundBy: 0)
         element.tap()
         
-        let element2 = element25.childrenMatchingType(.Other).elementBoundByIndex(1)
+        let element2 = element25.children(matching: .other).element(boundBy: 1)
         element2.tap()
         
-        let element3 = element25.childrenMatchingType(.Other).elementBoundByIndex(2)
+        let element3 = element25.children(matching: .other).element(boundBy: 2)
         element3.tap()
         
-        let element4 = element25.childrenMatchingType(.Other).elementBoundByIndex(3)
+        let element4 = element25.children(matching: .other).element(boundBy: 3)
         element4.tap()
         
-        let element5 = element25.childrenMatchingType(.Other).elementBoundByIndex(4)
+        let element5 = element25.children(matching: .other).element(boundBy: 4)
         element5.tap()
         
-        let element6 = element25.childrenMatchingType(.Other).elementBoundByIndex(5)
+        let element6 = element25.children(matching: .other).element(boundBy: 5)
         element6.tap()
         
-        let element7 = element25.childrenMatchingType(.Other).elementBoundByIndex(6)
+        let element7 = element25.children(matching: .other).element(boundBy: 6)
         element7.tap()
         
-        let element8 = element25.childrenMatchingType(.Other).elementBoundByIndex(7)
+        let element8 = element25.children(matching: .other).element(boundBy: 7)
         element8.tap()
         
-        let element9 = element25.childrenMatchingType(.Other).elementBoundByIndex(8)
+        let element9 = element25.children(matching: .other).element(boundBy: 8)
         element9.tap()
         
-        let element10 = element25.childrenMatchingType(.Other).elementBoundByIndex(9)
+        let element10 = element25.children(matching: .other).element(boundBy: 9)
         element10.tap()
         
-        let element11 = element25.childrenMatchingType(.Other).elementBoundByIndex(10)
+        let element11 = element25.children(matching: .other).element(boundBy: 10)
         element11.tap()
         
-        let element12 = element25.childrenMatchingType(.Other).elementBoundByIndex(11)
+        let element12 = element25.children(matching: .other).element(boundBy: 11)
         element12.tap()
         
-        let element13 = element25.childrenMatchingType(.Other).elementBoundByIndex(12)
+        let element13 = element25.children(matching: .other).element(boundBy: 12)
         element13.tap()
         
-        let element14 = element25.childrenMatchingType(.Other).elementBoundByIndex(13)
+        let element14 = element25.children(matching: .other).element(boundBy: 13)
         element14.tap()
         
-        let element15 = element25.childrenMatchingType(.Other).elementBoundByIndex(14)
+        let element15 = element25.children(matching: .other).element(boundBy: 14)
         element15.tap()
         
-        let element16 = element25.childrenMatchingType(.Other).elementBoundByIndex(15)
+        let element16 = element25.children(matching: .other).element(boundBy: 15)
         element16.tap()
         
-        let element17 = element25.childrenMatchingType(.Other).elementBoundByIndex(16)
+        let element17 = element25.children(matching: .other).element(boundBy: 16)
         element17.tap()
         
-        let element18 = element25.childrenMatchingType(.Other).elementBoundByIndex(17)
+        let element18 = element25.children(matching: .other).element(boundBy: 17)
         element18.tap()
         
-        let element19 = element25.childrenMatchingType(.Other).elementBoundByIndex(18)
+        let element19 = element25.children(matching: .other).element(boundBy: 18)
         element19.tap()
         
-        let element20 = element25.childrenMatchingType(.Other).elementBoundByIndex(19)
+        let element20 = element25.children(matching: .other).element(boundBy: 19)
         element20.tap()
         
-        let element21 = element25.childrenMatchingType(.Other).elementBoundByIndex(20)
+        let element21 = element25.children(matching: .other).element(boundBy: 20)
         element21.tap()
         
-        let element22 = element25.childrenMatchingType(.Other).elementBoundByIndex(21)
+        let element22 = element25.children(matching: .other).element(boundBy: 21)
         element22.tap()
         
-        let element23 = element25.childrenMatchingType(.Other).elementBoundByIndex(22)
+        let element23 = element25.children(matching: .other).element(boundBy: 22)
         element23.tap()
         
-        let element24 = element25.childrenMatchingType(.Other).elementBoundByIndex(23)
+        let element24 = element25.children(matching: .other).element(boundBy: 23)
         element24.tap()
-        element25.childrenMatchingType(.Other).elementBoundByIndex(24).tap()
-        element25.childrenMatchingType(.Other).elementBoundByIndex(25).tap()
+        element25.children(matching: .other).element(boundBy: 24).tap()
+        element25.children(matching: .other).element(boundBy: 25).tap()
         
-        let element26 = element25.childrenMatchingType(.Other).elementBoundByIndex(26)
+        let element26 = element25.children(matching: .other).element(boundBy: 26)
         element26.tap()
         
-        let element27 = element25.childrenMatchingType(.Other).elementBoundByIndex(27)
+        let element27 = element25.children(matching: .other).element(boundBy: 27)
         element27.tap()
         element.tap()
         element2.tap()
@@ -137,9 +137,9 @@ class ChimeeUITests: XCTestCase {
         element22.tap()
         element23.tap()
         element24.tap()
-        element25.childrenMatchingType(.Other).elementBoundByIndex(29).tap()
-        element25.childrenMatchingType(.Other).elementBoundByIndex(30).tap()
-        element25.childrenMatchingType(.Other).elementBoundByIndex(28).tap()
+        element25.children(matching: .other).element(boundBy: 29).tap()
+        element25.children(matching: .other).element(boundBy: 30).tap()
+        element25.children(matching: .other).element(boundBy: 28).tap()
         element26.tap()
         element27.tap()
 

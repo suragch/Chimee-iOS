@@ -4,63 +4,63 @@ class QwertyKeyboard: UIView, KeyboardKeyDelegate {
     
     weak var delegate: KeyboardDelegate? // probably the view controller
     
-    private let renderer = MongolUnicodeRenderer.sharedInstance
-    private var punctuationOn = false
-    private let nirugu = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_NIRUGU).toString()
-    private let fvs1 = ScalarString(MongolUnicodeRenderer.Uni.FVS1).toString()
-    private let fvs2 = ScalarString(MongolUnicodeRenderer.Uni.FVS2).toString()
-    private let fvs3 = ScalarString(MongolUnicodeRenderer.Uni.FVS3).toString()
-    private let mvs = ScalarString(MongolUnicodeRenderer.Uni.MVS).toString()
-    private let mongolA = ScalarString(MongolUnicodeRenderer.Uni.A).toString()
-    private let mongolE = ScalarString(MongolUnicodeRenderer.Uni.E).toString()
-    private let period = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_FULL_STOP).toString()
-    private let comma = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_COMMA).toString()
+    fileprivate let renderer = MongolUnicodeRenderer.sharedInstance
+    fileprivate var punctuationOn = false
+    fileprivate let nirugu = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_NIRUGU).toString()
+    fileprivate let fvs1 = ScalarString(MongolUnicodeRenderer.Uni.FVS1).toString()
+    fileprivate let fvs2 = ScalarString(MongolUnicodeRenderer.Uni.FVS2).toString()
+    fileprivate let fvs3 = ScalarString(MongolUnicodeRenderer.Uni.FVS3).toString()
+    fileprivate let mvs = ScalarString(MongolUnicodeRenderer.Uni.MVS).toString()
+    fileprivate let mongolA = ScalarString(MongolUnicodeRenderer.Uni.A).toString()
+    fileprivate let mongolE = ScalarString(MongolUnicodeRenderer.Uni.E).toString()
+    fileprivate let period = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_FULL_STOP).toString()
+    fileprivate let comma = ScalarString(MongolUnicodeRenderer.Uni.MONGOLIAN_COMMA).toString()
     
     // Keyboard Keys
     
     // Row 1
-    private let keyQ = KeyboardTextKey()
-    private let keyW = KeyboardTextKey()
-    private let keyE = KeyboardTextKey()
-    private let keyR = KeyboardTextKey()
-    private let keyT = KeyboardTextKey()
-    private let keyY = KeyboardTextKey()
-    private let keyU = KeyboardTextKey()
-    private let keyI = KeyboardTextKey()
-    private let keyO = KeyboardTextKey()
-    private let keyP = KeyboardTextKey()
+    fileprivate let keyQ = KeyboardTextKey()
+    fileprivate let keyW = KeyboardTextKey()
+    fileprivate let keyE = KeyboardTextKey()
+    fileprivate let keyR = KeyboardTextKey()
+    fileprivate let keyT = KeyboardTextKey()
+    fileprivate let keyY = KeyboardTextKey()
+    fileprivate let keyU = KeyboardTextKey()
+    fileprivate let keyI = KeyboardTextKey()
+    fileprivate let keyO = KeyboardTextKey()
+    fileprivate let keyP = KeyboardTextKey()
     
     // Row 2
-    private let keyA = KeyboardTextKey()
-    private let keyS = KeyboardTextKey()
-    private let keyD = KeyboardTextKey()
-    private let keyF = KeyboardTextKey()
-    private let keyG = KeyboardTextKey()
-    private let keyH = KeyboardTextKey()
-    private let keyJ = KeyboardTextKey()
-    private let keyK = KeyboardTextKey()
-    private let keyL = KeyboardTextKey()
-    private let keyNg = KeyboardTextKey()
+    fileprivate let keyA = KeyboardTextKey()
+    fileprivate let keyS = KeyboardTextKey()
+    fileprivate let keyD = KeyboardTextKey()
+    fileprivate let keyF = KeyboardTextKey()
+    fileprivate let keyG = KeyboardTextKey()
+    fileprivate let keyH = KeyboardTextKey()
+    fileprivate let keyJ = KeyboardTextKey()
+    fileprivate let keyK = KeyboardTextKey()
+    fileprivate let keyL = KeyboardTextKey()
+    fileprivate let keyNg = KeyboardTextKey()
     
     // Row 3
-    private let keyFVS = KeyboardFvsKey()
-    private let keyZ = KeyboardTextKey()
-    private let keyX = KeyboardTextKey()
-    private let keyC = KeyboardTextKey()
-    private let keyV = KeyboardTextKey()
-    private let keyB = KeyboardTextKey()
-    private let keyN = KeyboardTextKey()
-    private let keyM = KeyboardTextKey()
-    private let keyBackspace = KeyboardImageKey()
+    fileprivate let keyFVS = KeyboardFvsKey()
+    fileprivate let keyZ = KeyboardTextKey()
+    fileprivate let keyX = KeyboardTextKey()
+    fileprivate let keyC = KeyboardTextKey()
+    fileprivate let keyV = KeyboardTextKey()
+    fileprivate let keyB = KeyboardTextKey()
+    fileprivate let keyN = KeyboardTextKey()
+    fileprivate let keyM = KeyboardTextKey()
+    fileprivate let keyBackspace = KeyboardImageKey()
     
     // Row 4
-    private let keyKeyboard = KeyboardChooserKey()
-    private let keyMVS = KeyboardTextKey()
-    private let keyComma = KeyboardTextKey()
-    private let keySpace = KeyboardImageKey()
-    private let keyQuestion = KeyboardTextKey()
-    private let keySuffix = KeyboardTextKey()
-    private let keyReturn = KeyboardImageKey()
+    fileprivate let keyKeyboard = KeyboardChooserKey()
+    fileprivate let keyMVS = KeyboardTextKey()
+    fileprivate let keyComma = KeyboardTextKey()
+    fileprivate let keySpace = KeyboardImageKey()
+    fileprivate let keyQuestion = KeyboardTextKey()
+    fileprivate let keySuffix = KeyboardTextKey()
+    fileprivate let keyReturn = KeyboardImageKey()
     
     
     // MARK:- keyboard initialization
@@ -141,7 +141,7 @@ class QwertyKeyboard: UIView, KeyboardKeyDelegate {
         // Row 3
         keyFVS.setStrings("", fvs2Top: "", fvs3Top: "", fvs1Bottom: "", fvs2Bottom: "", fvs3Bottom: "")
         keyBackspace.image = UIImage(named: "backspace_dark")
-        keyBackspace.keyType = KeyboardImageKey.KeyType.Backspace
+        keyBackspace.keyType = KeyboardImageKey.KeyType.backspace
         keyBackspace.repeatOnLongPress = true
         
         // Row 4
@@ -314,7 +314,7 @@ class QwertyKeyboard: UIView, KeyboardKeyDelegate {
         keySpace.delegate = self
         keyQuestion.delegate = self
         keySuffix.delegate = self
-        keyReturn.addTarget(self, action: #selector(keyReturnTapped), forControlEvents: UIControlEvents.TouchUpInside)
+        keyReturn.addTarget(self, action: #selector(keyReturnTapped), for: UIControlEvents.touchUpInside)
         
     }
     
@@ -393,11 +393,11 @@ class QwertyKeyboard: UIView, KeyboardKeyDelegate {
     
     // MARK: - Other
     
-    func otherAvailableKeyboards(keyboardTypeAndName: [(KeyboardType, String)]) {
+    func otherAvailableKeyboards(_ keyboardTypeAndName: [(KeyboardType, String)]) {
         keyKeyboard.menuItems = keyboardTypeAndName
     }
     
-    func updateFvsKey(previousChar: String?, currentChar: String) {
+    func updateFvsKey(_ previousChar: String?, currentChar: String) {
         
         // get the last character (previousChar is not necessarily a single char)
         var lastChar: UInt32 = 0
@@ -476,7 +476,7 @@ class QwertyKeyboard: UIView, KeyboardKeyDelegate {
     
     // MARK: - KeyboardKeyDelegate protocol
     
-    func keyTextEntered(keyText: String) {
+    func keyTextEntered(_ keyText: String) {
         
         if keyText == mvs {
             keyMvsTapped()
@@ -506,7 +506,7 @@ class QwertyKeyboard: UIView, KeyboardKeyDelegate {
         keyFVS.setStrings("", fvs2Top: "", fvs3Top: "", fvs1Bottom: "", fvs2Bottom: "", fvs3Bottom: "")
     }
     
-    func keyFvsTapped(fvs: String) {
+    func keyFvsTapped(_ fvs: String) {
         self.delegate?.keyWasTapped(fvs)
     }
     
@@ -548,7 +548,7 @@ class QwertyKeyboard: UIView, KeyboardKeyDelegate {
     }
     
     // tell the view controller to switch keyboards
-    func keyNewKeyboardChosen(type: KeyboardType) {
+    func keyNewKeyboardChosen(_ type: KeyboardType) {
         delegate?.keyNewKeyboardChosen(type)
         //clearFvsKey()
     }

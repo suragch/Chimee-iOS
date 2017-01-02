@@ -15,7 +15,7 @@ class HistoryDataHelper: DataHelperProtocol {
     
     static func createTable() throws {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         // create table
@@ -38,18 +38,18 @@ class HistoryDataHelper: DataHelperProtocol {
     
     
     
-    static func insert(item: T) throws -> Int64 {
+    static func insert(_ item: T) throws -> Int64 {
         
         // error checking
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         guard
             let dateToInsert = item.dateTime,
             let messageToInsert = item.messageText else {
                 
-                throw DataAccessError.Nil_In_Data
+                throw DataAccessError.nil_In_Data
         }
         
         // do the insert
@@ -57,19 +57,19 @@ class HistoryDataHelper: DataHelperProtocol {
         do {
             let rowId = try db.run(insert)
             guard rowId > 0 else {
-                throw DataAccessError.Insert_Error
+                throw DataAccessError.insert_Error
             }
             return rowId
         } catch _ {
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
     }
     
-    static func insertMessage(messageToInsert: String) throws -> Int64 {
+    static func insertMessage(_ messageToInsert: String) throws -> Int64 {
         
         // error checking
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         
@@ -79,46 +79,46 @@ class HistoryDataHelper: DataHelperProtocol {
         do {
             let rowId = try db.run(insert)
             guard rowId > 0 else {
-                throw DataAccessError.Insert_Error
+                throw DataAccessError.insert_Error
             }
             return rowId
         } catch _ {
-            throw DataAccessError.Insert_Error
+            throw DataAccessError.insert_Error
         }
     }
     
-    static func delete(item: T) throws -> Void {
+    static func delete(_ item: T) throws -> Void {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         if let id = item.messageId {
             let query = historyMessageTable.filter(historyId == id)
             do {
                 let tmp = try db.run(query.delete())
                 guard tmp == 1 else {
-                    throw DataAccessError.Delete_Error
+                    throw DataAccessError.delete_Error
                 }
             } catch _ {
-                throw DataAccessError.Delete_Error
+                throw DataAccessError.delete_Error
             }
         }
     }
     
     static func deleteAll() throws -> Void {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         
         do {
             _ = try db.run(historyMessageTable.delete())
         } catch _ {
-            throw DataAccessError.Delete_Error
+            throw DataAccessError.delete_Error
         }
     }
     
     static func findAll() throws -> [T]? {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         var retArray = [T]()
         do {
@@ -127,26 +127,26 @@ class HistoryDataHelper: DataHelperProtocol {
                 retArray.append(Message(messageId: item[historyId], dateTime: item[historyDate], messageText: item[historyMessage]))
             }
         } catch _ {
-            throw DataAccessError.Search_Error
+            throw DataAccessError.search_Error
         }
         
         return retArray
         
     }
     
-    static func findRange(rangeOfRows: Range<Int>) throws -> [T]? {
+    static func findRange(_ rangeOfRows: Range<Int>) throws -> [T]? {
         guard let db = SQLiteDataStore.sharedInstance.ChimeeDB else {
-            throw DataAccessError.Datastore_Connection_Error
+            throw DataAccessError.datastore_Connection_Error
         }
         var retArray = [T]()
         do {
-            let query = historyMessageTable.order(historyDate.desc).limit(rangeOfRows.endIndex - rangeOfRows.startIndex, offset: rangeOfRows.startIndex)
+            let query = historyMessageTable.order(historyDate.desc).limit(rangeOfRows.upperBound - rangeOfRows.lowerBound, offset: rangeOfRows.lowerBound)
             let items = try db.prepare(query)
             for item in items {
                 retArray.append(Message(messageId: item[historyId], dateTime: item[historyDate], messageText: item[historyMessage]))
             }
         } catch _ {
-            throw DataAccessError.Search_Error
+            throw DataAccessError.search_Error
         }
         
         return retArray

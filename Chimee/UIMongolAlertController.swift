@@ -27,7 +27,7 @@ class UIMongolAlertController: UIViewController, UIGestureRecognizerDelegate  {
     var alertWidth: CGFloat?
     
     let renderer = MongolUnicodeRenderer.sharedInstance
-    private let buttonTapHighlightColor = UIColor.lightGrayColor()
+    fileprivate let buttonTapHighlightColor = UIColor.lightGray
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class UIMongolAlertController: UIViewController, UIGestureRecognizerDelegate  {
         if numberOfButtons == 1 {
             
             verticalDividerHeightConstraint.constant = 0
-            buttonEqualHeightsConstraint.active = false
+            buttonEqualHeightsConstraint.isActive = false
             bottomButtonHeightConstraint.constant = 0
             
             return
@@ -92,20 +92,20 @@ class UIMongolAlertController: UIViewController, UIGestureRecognizerDelegate  {
         
     }
     
-    func buttonOneHandler(gesture: UITapGestureRecognizer) {
+    func buttonOneHandler(_ gesture: UITapGestureRecognizer) {
         
         
-        if gesture.state == .Began{
+        if gesture.state == .began{
             topButton.backgroundColor = buttonTapHighlightColor
-        } else if gesture.state == UIGestureRecognizerState.Changed {
+        } else if gesture.state == UIGestureRecognizerState.changed {
             
             // cancel gesture
-            gesture.enabled = false
-            gesture.enabled = true
-            topButton.backgroundColor = UIColor.clearColor()
+            gesture.isEnabled = false
+            gesture.isEnabled = true
+            topButton.backgroundColor = UIColor.clear
             
-        } else if  gesture.state == .Ended {
-            topButton.backgroundColor = UIColor.clearColor()
+        } else if  gesture.state == .ended {
+            topButton.backgroundColor = UIColor.clear
             if let action = self.buttonOneAction {
                 action()
             }
@@ -114,19 +114,19 @@ class UIMongolAlertController: UIViewController, UIGestureRecognizerDelegate  {
         }
     }
     
-    func buttonTwoHandler(gesture: UITapGestureRecognizer) {
+    func buttonTwoHandler(_ gesture: UITapGestureRecognizer) {
         
-        if gesture.state == .Began {
+        if gesture.state == .began {
             bottomButton.backgroundColor = buttonTapHighlightColor
-        } else if gesture.state == UIGestureRecognizerState.Changed {
+        } else if gesture.state == UIGestureRecognizerState.changed {
             
             // cancel gesture
-            gesture.enabled = false
-            gesture.enabled = true
-            bottomButton.backgroundColor = UIColor.clearColor()
+            gesture.isEnabled = false
+            gesture.isEnabled = true
+            bottomButton.backgroundColor = UIColor.clear
             
-        } else if  gesture.state == .Ended {
-            bottomButton.backgroundColor = UIColor.clearColor()
+        } else if  gesture.state == .ended {
+            bottomButton.backgroundColor = UIColor.clear
             if let action = self.buttonTwoAction {
                 action()
             }
@@ -138,7 +138,7 @@ class UIMongolAlertController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     func dismissMongolAlert() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     

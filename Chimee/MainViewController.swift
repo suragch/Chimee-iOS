@@ -9,7 +9,7 @@ protocol MenuDelegate: class {
     func pasteText()
     func clearText()
     // message
-    func insertMessage(text: String)
+    func insertMessage(_ text: String)
 }
 
 class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, MenuDelegate {
@@ -17,7 +17,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     var docController: UIDocumentInteractionController!
     let minimumInputWindowSize = CGSize(width: 80, height: 150)
     let inputWindowSizeIncrement: CGFloat = 50
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     // MARK:- Outlets
     @IBOutlet weak var inputWindow: UIMongolTextView!
@@ -28,7 +28,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     @IBOutlet weak var inputWindowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var inputWindowWidthConstraint: NSLayoutConstraint!
     
-    @IBAction func testDeleteMe(sender: UIButton) {
+    @IBAction func testDeleteMe(_ sender: UIButton) {
         
         do {
             try UserDictionaryDataHelper.listInfoForTable()
@@ -48,7 +48,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     // MARK:- Actions
     
     
-    @IBAction func shareButtonTapped(sender: UIBarButtonItem) {
+    @IBAction func shareButtonTapped(_ sender: UIBarButtonItem) {
         
         // start spinner
         spinner.frame = self.view.frame // center it
@@ -61,27 +61,27 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         
         
         // Create a URL
-        let imageURL = NSURL(fileURLWithPath: NSTemporaryDirectory().stringByAppendingString("MiniiChimee.png"))
+        let imageURL = URL(fileURLWithPath: NSTemporaryDirectory() + "MiniiChimee.png")
         
         
         // create image on a background thread, then share it
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             
             // save image to URL
-            UIImagePNGRepresentation(image)?.writeToURL(imageURL, atomically: true)
+            try? UIImagePNGRepresentation(image)?.write(to: imageURL, options: [.atomic])
             
             
             // update suggestion bar with those words
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 
                 // share the image
                 self.clearText()
                 self.clearKeyboard()
-                self.docController.URL = imageURL
-                self.docController.presentOptionsMenuFromBarButtonItem(sender, animated: true)
+                self.docController.url = imageURL
+                self.docController.presentOptionsMenu(from: sender, animated: true)
                 
                 self.spinner.stopAnimating()
                 
@@ -94,7 +94,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         
     }
     
-    @IBAction func logoButtonTapped(sender: UIBarButtonItem) {
+    @IBAction func logoButtonTapped(_ sender: UIBarButtonItem) {
         
         // FIXME: This method is never called
         
@@ -115,12 +115,12 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         
         
         // Get any saved draft
-        if let savedText = NSUserDefaults.standardUserDefaults().stringForKey(UserDefaultsKey.lastMessage) {
-            dispatch_async(dispatch_get_main_queue()) {
+        if let savedText = UserDefaults.standard.string(forKey: UserDefaultsKey.lastMessage) {
+            DispatchQueue.main.async {
                 self.insertMessage(savedText)
             }
         }
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willResignActive), name: UIApplicationWillResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 
 
         
@@ -141,14 +141,14 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         inputWindow.underlyingTextView.becomeFirstResponder()
     }
   
 
     // MARK: - KeyboardDelegate protocol
     
-    func keyWasTapped(character: String) {
+    func keyWasTapped(_ character: String) {
         inputWindow.insertMongolText(character)
         increaseInputWindowSizeIfNeeded()
     }
@@ -170,18 +170,18 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         return inputWindow.twoMongolWordsBeforeCursor() 
     }
     
-    func replaceCurrentWordWith(replacementWord: String) {
+    func replaceCurrentWordWith(_ replacementWord: String) {
         inputWindow.replaceWordAtCursorWith(replacementWord)
     }
     
-    func keyNewKeyboardChosen(type: KeyboardType) {
+    func keyNewKeyboardChosen(_ type: KeyboardType) {
         // Do nothing
         // Keyboard Controller already handles keyboard switches
     }
     
     // MARK: - Other
     
-    private func increaseInputWindowSizeIfNeeded() {
+    fileprivate func increaseInputWindowSizeIfNeeded() {
         
         if inputWindow.frame.size == topContainerView.frame.size {
             return
@@ -216,7 +216,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     }
     
     
-    private func decreaseInputWindowSizeIfNeeded() {
+    fileprivate func decreaseInputWindowSizeIfNeeded() {
         
         if inputWindow.frame.size == minimumInputWindowSize {
             return
@@ -245,7 +245,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         }
     }
     
-    func imageFromTextView(textView: UIMongolTextView) -> UIImage {
+    func imageFromTextView(_ textView: UIMongolTextView) -> UIImage {
         
         // make a copy of the text view with the same size and text attributes
         let textViewCopy = UIMongolTextView(frame: textView.frame)
@@ -253,29 +253,29 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         
         // resize if contentView is larger than the frame
         if textView.contentSize.width > textView.frame.width {
-            textViewCopy.frame = CGRect(origin: CGPointZero, size: textView.contentSize)
+            textViewCopy.frame = CGRect(origin: CGPoint.zero, size: textView.contentSize)
         }
         
         // draw the text view to an image
-        UIGraphicsBeginImageContextWithOptions(textViewCopy.bounds.size, false, UIScreen.mainScreen().scale)
-        textViewCopy.drawViewHierarchyInRect(textViewCopy.bounds, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(textViewCopy.bounds.size, false, UIScreen.main.scale)
+        textViewCopy.drawHierarchy(in: textViewCopy.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "copyMenuSegue" {
             
-            let popoverViewController = segue.destinationViewController as! CopyMenuViewController
-            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            let popoverViewController = segue.destination as! CopyMenuViewController
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
             
         } else if segue.identifier == "favoriteSegue" {
             
-            let favoriteViewController = segue.destinationViewController as! FavoriteViewController
+            let favoriteViewController = segue.destination as! FavoriteViewController
             
             favoriteViewController.currentMessage = inputWindow.text
             favoriteViewController.delegate = self
@@ -286,8 +286,8 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     func willResignActive() {
         
         // save the current text
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(inputWindow.text, forKey: UserDefaultsKey.lastMessage)
+        let defaults = UserDefaults.standard
+        defaults.set(inputWindow.text, forKey: UserDefaultsKey.lastMessage)
         
     }
     
@@ -310,7 +310,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     
     // MARK: - Database
     
-    func saveMessageToHistory(message: String) {
+    func saveMessageToHistory(_ message: String) {
         
         // do in background
         guard message.characters.count > 0 else {
@@ -318,14 +318,14 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         }
         
         // do on background thread
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             
             
             do {
                 
-                try HistoryDataHelper.insertMessage(message)
+                _ = try HistoryDataHelper.insertMessage(message)
                 //self.messages = try FavoriteDataHelper.findAll()
                 
             } catch _ {
@@ -339,10 +339,10 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     
     // MARK: - UIPopoverPresentationControllerDelegate method
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         
         // Force popover style
-        return UIModalPresentationStyle.None
+        return UIModalPresentationStyle.none
     }
     
     // MARK: - Menu Delegate
@@ -359,12 +359,12 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         if let selectedText = inputWindow.selectedText() {
             
             // add unicode text to the pasteboard
-            UIPasteboard.generalPasteboard().string = selectedText
+            UIPasteboard.general.string = selectedText
             
         } else { // copy everything
             
             // add unicode text to the pasteboard
-            UIPasteboard.generalPasteboard().string = inputWindow.text
+            UIPasteboard.general.string = inputWindow.text
         }
         
         // tell user about problems with Unicode text
@@ -373,7 +373,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     }
     
     func pasteText() {
-        if let myString = UIPasteboard.generalPasteboard().string {
+        if let myString = UIPasteboard.general.string {
             inputWindow.insertMongolText(myString)
         }
     }
@@ -385,7 +385,7 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
         inputWindowHeightConstraint.constant = minimumInputWindowSize.height
     }
     
-    func insertMessage(text: String) {
+    func insertMessage(_ text: String) {
         inputWindow.insertMongolText(text)
         increaseInputWindowSizeIfNeeded()
         
