@@ -148,7 +148,6 @@ class KeyboardController: UIView, KeyboardDelegate, UITableViewDelegate, UITable
         
         self.addSubview(currentKeyboard!)
     }
-    
 
     override func layoutSubviews() {
         super.layoutSubviews()

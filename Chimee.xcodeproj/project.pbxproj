@@ -401,6 +401,7 @@
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = HSUZ2UJNHR;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 					506CB1FA1BF46E8C00BCBBEE = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -667,6 +668,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jonathan Sande (HSUZ2UJNHR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = HSUZ2UJNHR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -691,6 +694,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jonathan Sande (HSUZ2UJNHR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = HSUZ2UJNHR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

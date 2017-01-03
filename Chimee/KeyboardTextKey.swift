@@ -62,7 +62,7 @@ class KeyboardTextKey: KeyboardKey {
             updateSecondaryLayerFrame()
         }
     }
-    @IBInspectable var secondaryStringFontColor: UIColor = UIColor.black {
+    @IBInspectable var secondaryStringFontColor: UIColor = UIColor.gray {
         didSet {
             updateSecondaryLayerFrame()
         }
@@ -113,8 +113,21 @@ class KeyboardTextKey: KeyboardKey {
     
     func updatePrimaryLayerFrame() {
         
+        // this method gets called several times before bounds is set
+        if layer.bounds.width == 0 || layer.bounds.height == 0 {
+            return
+        }
+        
+        // TODO: - take out the hard coded values from here. Also in updateSecondaryLayerFrame()
+        var fontSizeToUse = primaryStringFontSize
+        if layer.bounds.height >= 60 && layer.bounds.height < 100 {
+            fontSizeToUse = primaryStringFontSize * 1.5
+        } else if layer.bounds.height >= 100 {
+            fontSizeToUse = primaryStringFontSize * 2
+        }
+        
         let myAttributes = [
-            NSFontAttributeName: UIFont(name: mongolFontName, size: primaryStringFontSize )! ,
+            NSFontAttributeName: UIFont(name: mongolFontName, size: fontSizeToUse )! ,
             NSForegroundColorAttributeName: primaryStringFontColor
         ] as [String : Any]
         let attrString = NSMutableAttributedString(string: primaryLayer.displayString, attributes: myAttributes )
@@ -129,8 +142,19 @@ class KeyboardTextKey: KeyboardKey {
     
     func updateSecondaryLayerFrame() {
         
+        if layer.bounds.width == 0 || layer.bounds.height == 0 {
+            return
+        }
+        
+        var fontSizeToUse = secondaryStringFontSize
+        if layer.bounds.height >= 60 && layer.bounds.height < 100 {
+            fontSizeToUse = secondaryStringFontSize * 1.5
+        } else if layer.bounds.height >= 100 {
+            fontSizeToUse = secondaryStringFontSize * 2
+        }
+        
         let myAttributes = [
-            NSFontAttributeName: UIFont(name: mongolFontName, size: secondaryStringFontSize )! ,
+            NSFontAttributeName: UIFont(name: mongolFontName, size: fontSizeToUse )! ,
             NSForegroundColorAttributeName: secondaryStringFontColor
         ] as [String : Any]
         let attrString = NSMutableAttributedString(string: secondaryLayer.displayString, attributes: myAttributes )

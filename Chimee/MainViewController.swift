@@ -21,32 +21,12 @@ class MainViewController: UIViewController, KeyboardDelegate, UIGestureRecognize
     
     // MARK:- Outlets
     @IBOutlet weak var inputWindow: UIMongolTextView!
-    
     @IBOutlet weak var topContainerView: UIView!
-    
     @IBOutlet weak var keyboardContainer: KeyboardController!
     @IBOutlet weak var inputWindowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var inputWindowWidthConstraint: NSLayoutConstraint!
     
-    @IBAction func testDeleteMe(_ sender: UIButton) {
-        
-        do {
-            try UserDictionaryDataHelper.listInfoForTable()
-        } catch _ { print("listInfoForTable error") }
-        
-        // print all the words in the user dictionary
-        do {
-            if let words = try UserDictionaryDataHelper.findAll() {
-                for word in words {
-                    print("\(word.wordId!) \(word.word!) \(word.frequency!) \(word.following!)")
-                    
-                }
-            }
-        } catch _ { print("find or delete error") }
-    }
-
     // MARK:- Actions
-    
     
     @IBAction func shareButtonTapped(_ sender: UIBarButtonItem) {
         
