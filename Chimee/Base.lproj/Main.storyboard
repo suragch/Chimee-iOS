@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1sX-gH-4Rv">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -20,14 +20,14 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6og-34-jPu" userLabel="Top Container">
-                                <rect key="frame" x="0.0" y="64" width="600" height="268"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6og-34-jPu" userLabel="Top Container">
+                                <rect key="frame" x="-4" y="64" width="383" height="301.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kLj-wN-Crw" customClass="UIMongolTextView" customModule="Chimee" customModuleProvider="target">
-                                        <rect key="frame" x="260" y="59" width="80" height="150"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLj-wN-Crw" customClass="UIMongolTextView" customModule="Chimee" customModuleProvider="target">
+                                        <rect key="frame" x="151.5" y="76" width="80" height="150"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="e2L-vN-bI7"/>
@@ -45,11 +45,11 @@
                                     <constraint firstItem="kLj-wN-Crw" firstAttribute="centerY" secondItem="6og-34-jPu" secondAttribute="centerY" id="kWV-1s-Avb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ef8-61-ixq">
-                                <rect key="frame" x="0.0" y="332" width="600" height="268"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ef8-61-ixq">
+                                <rect key="frame" x="-4" y="365.5" width="383" height="301.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmF-Vz-mQv" userLabel="Keyboard Container" customClass="KeyboardController" customModule="Chimee" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="4" width="584" height="264"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmF-Vz-mQv" userLabel="Keyboard Container" customClass="KeyboardController" customModule="Chimee" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="4" width="367" height="297.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                 </subviews>
@@ -123,11 +123,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FAj-Ff-8nL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4Eh-nX-hBr">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEG-E9-7q5" customClass="UIMongolTableView" customModule="Chimee" customModuleProvider="target">
-                                <rect key="frame" x="8" y="72" width="584" height="520"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEG-E9-7q5" customClass="UIMongolTableView" customModule="Chimee" customModuleProvider="target">
+                                <rect key="frame" x="4" y="72" width="367" height="587"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -172,11 +172,11 @@
                         <viewControllerLayoutGuide type="bottom" id="2cj-LT-rPm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4us-bi-1pv">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XNv-am-oV8" customClass="UIMongolTableView" customModule="Chimee" customModuleProvider="target">
-                                <rect key="frame" x="8" y="72" width="584" height="520"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XNv-am-oV8" customClass="UIMongolTableView" customModule="Chimee" customModuleProvider="target">
+                                <rect key="frame" x="4" y="72" width="367" height="587"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -212,23 +212,23 @@
                         <viewControllerLayoutGuide type="bottom" id="feo-30-OfG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1m2-4Z-9LF">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chimee 1.x.x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-bu-nMC">
-                                <rect key="frame" x="232" y="286" width="136" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chimee 1.x.x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-bu-nMC">
+                                <rect key="frame" x="119.5" y="319" width="136" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="StudyMongolian@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLG-z2-7dE">
-                                <rect key="frame" x="191" y="559" width="218" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StudyMongolian@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLG-z2-7dE">
+                                <rect key="frame" x="78.5" y="626" width="218" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ChimeeImage300" translatesAutoresizingMaskIntoConstraints="NO" id="wwy-lt-a9N">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChimeeImage300" translatesAutoresizingMaskIntoConstraints="NO" id="wwy-lt-a9N">
+                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -297,7 +297,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1sX-gH-4Rv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HqW-M7-Ydg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HqW-M7-Ydg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -319,11 +319,11 @@
                         <viewControllerLayoutGuide type="bottom" id="GNB-IB-iGX"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Udy-BV-xV7">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jrq-Jl-i8q" userLabel="Alert Container">
-                                <rect key="frame" x="143" y="185" width="315" height="230"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrq-Jl-i8q" userLabel="Alert Container">
+                                <rect key="frame" x="30" y="218.5" width="315" height="230"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nca-6i-WZW" userLabel="MessageParent">
                                         <rect key="frame" x="0.0" y="0.0" width="255" height="230"/>
