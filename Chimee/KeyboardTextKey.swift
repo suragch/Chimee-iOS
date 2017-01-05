@@ -1,8 +1,6 @@
 // KeyboardTextKey
-// version 1.0
-
+// version 1.1
 // This keyboard key has two text string locations for vertical Mongolian script, one centered and one in the bottom right.
-
 import UIKit
 
 @IBDesignable
@@ -129,7 +127,7 @@ class KeyboardTextKey: KeyboardKey {
         let myAttributes = [
             NSFontAttributeName: UIFont(name: mongolFontName, size: fontSizeToUse )! ,
             NSForegroundColorAttributeName: primaryStringFontColor
-        ] as [String : Any]
+            ] as [String : Any]
         let attrString = NSMutableAttributedString(string: primaryLayer.displayString, attributes: myAttributes )
         let size = dimensionsForAttributedString(attrString)
         
@@ -156,7 +154,7 @@ class KeyboardTextKey: KeyboardKey {
         let myAttributes = [
             NSFontAttributeName: UIFont(name: mongolFontName, size: fontSizeToUse )! ,
             NSForegroundColorAttributeName: secondaryStringFontColor
-        ] as [String : Any]
+            ] as [String : Any]
         let attrString = NSMutableAttributedString(string: secondaryLayer.displayString, attributes: myAttributes )
         let size = dimensionsForAttributedString(attrString)
         
@@ -204,7 +202,6 @@ class KeyboardTextKey: KeyboardKey {
 }
 
 // MARK: - Key Text Layer Class
-
 class KeyboardKeyTextLayer: CATextLayer {
     
     // set this to false if not using a mirrored font
@@ -228,5 +225,3 @@ class KeyboardKeyTextLayer: CATextLayer {
         ctx.restoreGState()
     }
 }
-
-
